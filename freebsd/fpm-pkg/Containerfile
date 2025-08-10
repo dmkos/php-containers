@@ -1,5 +1,5 @@
 ARG FREEBSD=14.3
-FROM docker.io/freebsd/freebsd-runtime:$FREEBSD
+FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD
 
 # Install software
 ARG PHP=php84
