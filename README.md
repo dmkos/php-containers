@@ -13,6 +13,12 @@ FreeBSD containers intend to use with Podman. Please install it according to
 PHP-FPM container example as closest as possible to official. PHP installed
 via a package manager, which does not guarantee the exact version.
 
+Supported tags and respective `Containerfile` links:
+
+* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/Containerfile)
+
+[README.md](./freebsd/fpm-pkg/README.md)
+
 ## Links
 
 * [My Docker Hub profile](https://hub.docker.com/u/dmkos)
