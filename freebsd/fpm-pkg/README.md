@@ -7,9 +7,10 @@ installation which does not guarantee exact version.
 
 ## Usage
 
-Image published at Docker Hub.
+Image published at Container Registry and Docker Hub.
 
-https://hub.docker.com/r/dmkos/php-freebsd
+* https://github.com/dmkos/php-containers/pkgs/container/php
+* https://hub.docker.com/r/dmkos/php-freebsd
 
 ### Tags
 
@@ -23,7 +24,7 @@ PHP installed via the package manager.
 You have to choose php.ini variant for development or production environment.
 
 ```dockerfile
-FROM docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg
+FROM ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
 
 # Use the default production configuration
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -41,7 +42,7 @@ which are do all the work, is `www`.
 It is possible, but not a main purpose of the container.
 
 ```shell
-podman run -it --rm -v "$PWD":/usr/local/www/html docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg php your-script.php
+podman run -it --rm -v "$PWD":/usr/local/www/html ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg php your-script.php
 ```
 
 ### Install more PHP extensions
@@ -53,7 +54,7 @@ with external dependencies.
 Assume you want to install gd along with intl:
 
 ```dockerfile
-FROM docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg
+FROM ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
 
 # Install PHP extensions
 RUN set -eux; \
@@ -70,7 +71,7 @@ In our case, consider install composer with the package manager too, because
 we can also get unzip for help:
 
 ```dockerfile
-FROM docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg
+FROM ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
 
 # Install composer and unzip
 RUN set -eux; \
@@ -89,7 +90,7 @@ on host sytem. Never expose 9000 port to public. `compose.yaml` example:
 ```yaml
 services:
   php:
-    image: docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg
+    image: ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
@@ -100,7 +101,7 @@ services:
 Or corresponding command:
 
 ```shell
-podman run -d -p "127.0.0.1:9000":9000 --name php -v "$PWD/myapp":/usr/local/www/html --restart always docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14.3-pkg
+podman run -d -p "127.0.0.1:9000":9000 --name php -v "$PWD/myapp":/usr/local/www/html --restart always ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
 ```
 
 I recommend [Caddy](https://caddyserver.com/) as web server. Install:
