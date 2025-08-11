@@ -3,6 +3,10 @@
 This repository contains different container images of PHP. For details, see
 the corresponding `README.md` files.
 
+## Supported tags
+
+* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
+
 ## FreeBSD
 
 FreeBSD containers intend to use with Podman. Please install it according to
@@ -12,10 +16,6 @@ FreeBSD containers intend to use with Podman. Please install it according to
 
 PHP-FPM container example as closest as possible to official. PHP installed
 via a package manager, which does not guarantee the exact version.
-
-Supported tags and respective `Containerfile` links:
-
-* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
 
 [README.md](./freebsd/fpm-pkg/README.md)
 
