@@ -2,6 +2,8 @@ services:
   php:
     image: ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
     restart: always
+    volumes:
+      - ./html:/usr/local/www/html
   web:
     image: docker.io/library/caddy:2
     platform: linux/amd64
@@ -12,6 +14,7 @@ services:
       - "80:80"
     volumes:
       - ./config:/etc/caddy
+      - ./html:/srv
       - caddy_data:/data
       - caddy_config:/config
 
