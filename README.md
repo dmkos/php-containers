@@ -3,6 +3,9 @@
 This repository contains different container images of PHP. For details, see
 the corresponding `README.md` files.
 
+For your convenience, images pull URL is `ghcr.io/dmkos/php`.
+Specify tag from list below.
+
 ## Supported tags
 
 * [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
