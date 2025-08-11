@@ -152,6 +152,21 @@ It is probably because `/etc/hosts` placed in layer of freebsd-runtime image
 while upgrade command works in its own. So Podman or ZFS may not be prepared for
 such situation.
 
+### Service discovery
+
+For illustration purposes I have prepared [example](./examples/caddy)
+of simple `compose.yaml` with very basic Caddy configuration. Linux emulation
+must be enabled:
+
+```shell
+service linux enable
+service linux start
+podman-compose up -d
+```
+
+During request attempt you will receive `502 Bad Gateway` response with
+logged error like `dial tcp: lookup php on xxx.xxx.xxx.xxx:53: no such host`.
+
 ## Links
 
 * [Installing Podman on FreeBSD 14.0](https://podman.io/docs/installation#installing-on-freebsd-140)
