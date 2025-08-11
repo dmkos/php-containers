@@ -15,7 +15,7 @@ via a package manager, which does not guarantee the exact version.
 
 Supported tags and respective `Containerfile` links:
 
-* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/Containerfile)
+* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
 
 [README.md](./freebsd/fpm-pkg/README.md)
 
