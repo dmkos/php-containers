@@ -27,5 +27,5 @@ via a package manager, which does not guarantee the exact version.
 * [My Docker Hub profile](https://hub.docker.com/u/dmkos)
 * [PHP official images](https://hub.docker.com/_/php)
 * [FreeBSD Docker Hub profile](https://hub.docker.com/u/freebsd)
-* [Контейнеры PHP](https://git.dmkos.ru/dmkos/php-containers) which is "mirror"
+* [Контейнеры PHP](https://git.dmkos.ru/containers/php) which is "mirror"
 of this repository.
