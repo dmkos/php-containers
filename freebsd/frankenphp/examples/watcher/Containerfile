@@ -1,0 +1,4 @@
+FROM ghcr.io/dmkos/php:frankenphp-freebsd
+
+# Use the default development configuration
+RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"

@@ -1,0 +1,4 @@
+FROM ghcr.io/dmkos/php:frankenphp-freebsd
+
+# Use the default production configuration
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

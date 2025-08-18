@@ -1,0 +1,60 @@
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: builder.containerfile
+      args:
+        - FREEBSD_VERSION=${FREEBSD_VERSION}
+        - PHP_VERSION=${PHP_VERSION}
+        - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
+        - WATCHER_VERSION=${WATCHER_VERSION}
+      labels:
+        - "org.opencontainers.image.description=FrankenPHP builder image for FreeBSD"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP_VERSION}-freebsd${FREEBSD_VERSION}"
+        - "ghcr.io/dmkos/php:frankenphp-1.9-builder-php8.4-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1-builder-php8-freebsd"
+        - "ghcr.io/dmkos/php:frankenphp-builder-freebsd"
+    command: "echo 'Build only'"
+  runner:
+    build:
+      context: .
+      dockerfile: runner.containerfile
+      args:
+        - FREEBSD_VERSION=${FREEBSD_VERSION}
+        - PHP_VERSION=${PHP_VERSION}
+        - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
+      labels:
+        - "org.opencontainers.image.description=FrankenPHP end-user rootless image for FreeBSD"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-php${PHP_VERSION}-freebsd${FREEBSD_VERSION}"
+        - "ghcr.io/dmkos/php:frankenphp-1.9-php8.4-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1-php8-freebsd"
+        - "ghcr.io/dmkos/php:frankenphp-freebsd"
+    restart: always
+    environment:
+      FRANKENPHP_CONFIG: |
+        worker {
+          file ./public/index.php
+          num 1
+          watch
+        }
+      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
+    ports:
+      - "80:10080" # HTTP
+      - "443:10443" # HTTPS
+      - "443:10443/udp" # HTTP/3
+    volumes:
+      - ./src/demo:/usr/local/www/app
+      - franken_config:/var/db/frankenphp/config
+      - franken_data:/var/db/frankenphp/data
+
+volumes:
+  franken_config:
+  franken_data:

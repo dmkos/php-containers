@@ -1,0 +1,18 @@
+services:
+  php:
+    build: .
+    restart: always
+    environment:
+      SERVER_NAME: "example.com"
+    ports:
+      - "80:10080" # HTTP
+      - "443:10443" # HTTPS
+      - "443:10443/udp" # HTTP/3
+    volumes:
+      - ./src:/usr/local/www/app
+      - franken_config:/var/db/frankenphp/config
+      - franken_data:/var/db/frankenphp/data
+
+volumes:
+  franken_config:
+  franken_data:

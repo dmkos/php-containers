@@ -1,0 +1,19 @@
+#!/bin/sh
+
+find /usr/local/include/php /usr/local/lib/php /usr/local/share/pear \
+    -type d \
+    -perm 700 \
+    -exec chmod 755 {} +
+
+find /usr/local/lib/php \
+    -type f \
+    -name '*.so' \
+    -perm 600 \
+    -exec chmod 755 {} +
+
+find /usr/local/share/pear \
+    -type f \
+    -perm 600 \
+    -exec chmod 644 {} +
+
+chmod 755 /usr/local/sbin

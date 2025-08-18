@@ -1,0 +1,49 @@
+#!/bin/sh
+set -e
+
+# prefer user supplied CFLAGS, but default to our PHP_CFLAGS
+: ${CFLAGS:=$PHP_CFLAGS}
+: ${CXXFLAGS:=$PHP_CXXFLAGS}
+: ${LDFLAGS:=$PHP_LDFLAGS}
+export CFLAGS CXXFLAGS LDFLAGS
+
+srcExists=
+if [ -d /usr/src/php ]; then
+    srcExists=1
+fi
+podman-php-source extract
+if [ -z "$srcExists" ]; then
+    touch /usr/src/php/.podman-delete-me
+fi
+
+cd /usr/src/php/ext
+
+usage() {
+    echo "usage: $0 ext-name [configure flags]"
+    echo "   ie: $0 gd --with-jpeg-dir=/usr/local/something"
+    echo
+    echo 'Possible values for ext-name:'
+    find . \
+            -mindepth 2 \
+            -maxdepth 2 \
+            -type f \
+            -name 'config.m4' \
+        | xargs -n1 dirname \
+        | xargs -n1 basename \
+        | sort \
+        | xargs
+    echo
+    echo 'Some of the above modules are already compiled into PHP; please check'
+    echo 'the output of "php -i" to see which modules are already loaded.'
+}
+
+ext="$1"
+if [ -z "$ext" ] || [ ! -d "$ext" ]; then
+    usage >&2
+    exit 1
+fi
+shift
+
+cd "$ext"
+phpize
+./configure --enable-option-checking=fatal "$@"

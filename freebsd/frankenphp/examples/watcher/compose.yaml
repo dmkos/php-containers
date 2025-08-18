@@ -1,0 +1,24 @@
+services:
+  php:
+    build: .
+    restart: always
+    environment:
+      FRANKENPHP_CONFIG: |
+        worker {
+          file ./public/index.php
+          num 1
+          watch
+        }
+      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
+      CADDY_GLOBAL_OPTIONS: "auto_https off"
+      SERVER_NAME: "http://"
+    ports:
+      - "80:10080"
+    volumes:
+      - ./src:/usr/local/www/app
+      - franken_config:/var/db/frankenphp/config
+      - franken_data:/var/db/frankenphp/data
+
+volumes:
+  franken_config:
+  franken_data:
