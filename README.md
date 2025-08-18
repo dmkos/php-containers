@@ -37,6 +37,11 @@ extensions and `composer`.
 
 [README.md](./freebsd/frankenphp/README.md)
 
+## Feedback
+
+Feel free to create any [issues](https://github.com/dmkos/php-containers/issues).
+[Pull requests](https://github.com/dmkos/php-containers/pulls) are would be really appreciated.
+
 ## Links
 
 * [My Docker Hub profile](https://hub.docker.com/u/dmkos)
