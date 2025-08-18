@@ -307,7 +307,7 @@ COPY --from=builder /usr/local/www/app/public/index.php /usr/local/www/app/publi
 
 Next operations in `runner.containerfile` are about setting up files and
 directories permissions, configure FrankenPHP and the container to run under
-non-root user.
+non-root user. Hope it self-documented.
 
 ## Links
 
