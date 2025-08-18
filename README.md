@@ -3,7 +3,12 @@
 This repository contains different container images of PHP. For details, see
 the corresponding `README.md` files.
 
-For your convenience, images pull URL is `ghcr.io/dmkos/php`.
+For your convenience, images pull URL is:
+
+```
+ghcr.io/dmkos/php
+```
+
 Specify tag from list below.
 
 ## Supported tags
