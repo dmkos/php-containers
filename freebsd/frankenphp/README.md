@@ -190,7 +190,7 @@ as an example.
 
 I'm sorry but one does not simply install more PHP extensions. To do that you
 need compiler, linker and other build tools comes with FreeBSD. In other words,
-they cannot be installed via package manager. That is why I decided to
+they cannot be installed via package manager. Therefore, it was decided to
 extract entire base system into image similar to
 [creating a jail](https://docs.freebsd.org/en/books/handbook/jails/#thin-jail).
 
