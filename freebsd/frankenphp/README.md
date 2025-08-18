@@ -188,7 +188,7 @@ as an example.
 
 ## Builder image
 
-I'm sorry but one does not simply install more PHP extensions. To do that you
+Unfortunately, one does not simply install more PHP extensions. To do that you
 need compiler, linker and other build tools comes with FreeBSD. In other words,
 they cannot be installed via package manager. Therefore, it was decided to
 extract entire base system into image similar to
