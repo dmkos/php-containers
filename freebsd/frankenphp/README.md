@@ -206,8 +206,8 @@ RUN set -eux; \
 > [!caution]
 > The operation immediately adds about 900 MB to the image.
 
-Other utilities and libraries installed by `pkg`. Consult with 
-[FreeBSD FreshPorts](https://www.freshports.org/lang/php84/) to define required
+Other utilities and libraries installed by `pkg`. Visit 
+[FreeBSD FreshPorts](https://www.freshports.org/lang/php84/) to track required
 dependencies.
 
 ### Installing extensions
