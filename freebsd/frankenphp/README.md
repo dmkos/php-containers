@@ -101,7 +101,7 @@ services:
       - "443:10443" # HTTPS
       - "443:10443/udp" # HTTP/3
     volumes:
-      - ./src:/usr/local/www/app
+      - ./app:/usr/local/www/app
       - franken_config:/var/db/frankenphp/config
       - franken_data:/var/db/frankenphp/data
 
@@ -150,7 +150,7 @@ services:
     ports:
       - "80:10080"
     volumes:
-      - ./src:/usr/local/www/app
+      - ./app:/usr/local/www/app
       - franken_config:/var/db/frankenphp/config
       - franken_data:/var/db/frankenphp/data
 
