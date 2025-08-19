@@ -121,6 +121,7 @@ Provided `Caddyfile` accepts following environment variables:
 * `FRANKENPHP_CONFIG`: inject config under the `frankenphp` directive
 * `CADDY_EXTRA_CONFIG`: custom configuration, maybe
 [snippets](https://caddyserver.com/docs/caddyfile/concepts#snippets)
+or www redirects
 * `SERVER_NAME`: [address](https://caddyserver.com/docs/caddyfile/concepts#addresses)
 on which to listen, the provided hostname will also be used for the generated TLS certificate
 * `SERVER_ROOT`: change the root directory of the site, defaults to `public/`
