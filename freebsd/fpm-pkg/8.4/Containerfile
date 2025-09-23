@@ -1,36 +1,36 @@
-ARG FREEBSD=14.3
-FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD
+ARG FREEBSD_VERSION
+FROM docker.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
 # Install software
-ARG PHP=php84
+ARG PHP_PACKAGE
 RUN set -eux; \
         pkg bootstrap -y; \
         # use the latest packages
         mkdir -p /usr/local/etc/pkg/repos; \
         echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf; \
         pkg install -y \
-            ${PHP} \
-            ${PHP}-ctype \
-            ${PHP}-curl \
-            ${PHP}-dom \
-            ${PHP}-fileinfo \
-            ${PHP}-filter \
-            ${PHP}-iconv \
-            ${PHP}-mbstring \
-            ${PHP}-opcache \
-            ${PHP}-pdo_sqlite \
-            ${PHP}-phar \
-            ${PHP}-posix \
-            ${PHP}-readline \
-            ${PHP}-session \
-            ${PHP}-simplexml \
-            ${PHP}-sodium \
-            ${PHP}-sqlite3 \
-            ${PHP}-tokenizer \
-            ${PHP}-xml \
-            ${PHP}-xmlreader \
-            ${PHP}-xmlwriter \
-            ${PHP}-zlib; \
+            ${PHP_PACKAGE} \
+            ${PHP_PACKAGE}-ctype \
+            ${PHP_PACKAGE}-curl \
+            ${PHP_PACKAGE}-dom \
+            ${PHP_PACKAGE}-fileinfo \
+            ${PHP_PACKAGE}-filter \
+            ${PHP_PACKAGE}-iconv \
+            ${PHP_PACKAGE}-mbstring \
+            ${PHP_PACKAGE}-opcache \
+            ${PHP_PACKAGE}-pdo_sqlite \
+            ${PHP_PACKAGE}-phar \
+            ${PHP_PACKAGE}-posix \
+            ${PHP_PACKAGE}-readline \
+            ${PHP_PACKAGE}-session \
+            ${PHP_PACKAGE}-simplexml \
+            ${PHP_PACKAGE}-sodium \
+            ${PHP_PACKAGE}-sqlite3 \
+            ${PHP_PACKAGE}-tokenizer \
+            ${PHP_PACKAGE}-xml \
+            ${PHP_PACKAGE}-xmlreader \
+            ${PHP_PACKAGE}-xmlwriter \
+            ${PHP_PACKAGE}-zlib; \
         # cleanup to reduce image size
         pkg clean -ay; \
         rm -rf /var/db/pkg/repos
@@ -48,8 +48,7 @@ ENV PHP_INI_DIR /usr/local/etc
 COPY etc/php-fpm.d/* ${PHP_INI_DIR}/php-fpm.d/
 COPY etc/php/* ${PHP_INI_DIR}/php/
 
-RUN chmod 755 /usr/local/sbin
-COPY --chmod=755 podman-php-entrypoint /usr/local/sbin/
+COPY --chmod=755 podman-php-entrypoint /usr/local/bin/
 ENTRYPOINT ["podman-php-entrypoint"]
 WORKDIR /usr/local/www/html
 
