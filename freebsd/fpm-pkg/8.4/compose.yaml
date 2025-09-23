@@ -11,12 +11,8 @@ services:
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php-freebsd:${PHP_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "glcr.dmkos.ru/containers/php:${PHP_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "glcr.dmkos.ru/containers/php:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
