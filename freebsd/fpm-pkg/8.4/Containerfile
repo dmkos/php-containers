@@ -1,5 +1,5 @@
 ARG FREEBSD_VERSION
-FROM docker.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
+FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
 # Install software
 ARG PHP_PACKAGE
