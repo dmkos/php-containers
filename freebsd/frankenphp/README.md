@@ -12,9 +12,9 @@ two different containers for build and run in production environment.
 The tags mostly follow original FrankenPHP [pattern](https://frankenphp.dev/docs/docker/)
 with `frankenphp` prefix and fewer combinations.
 
-* [`frankenphp-1.9.0-php8.4.11-freebsd14.3`, `frankenphp-1.9-php8.4-freebsd14`, `frankenphp-1-php8-freebsd`, `frankenphp-freebsd`](./8.4-14.3/runner.containerfile) -
+* [`frankenphp-1.9.1-php8.4.12-freebsd14.3`, `frankenphp-1.9-php8.4-freebsd14`, `frankenphp-1-php8-freebsd`, `frankenphp-php8.4-freebsd`, `frankenphp-freebsd`](./8.4-14.3/runner.containerfile) -
 end-user "runner" image
-* [`frankenphp-1.9.0-builder-php8.4.11-freebsd14.3`, `frankenphp-1.9-builder-php8.4-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-freebsd`](./8.4-14.3/builder.containerfile) -
+* [`frankenphp-1.9.1-builder-php8.4.12-freebsd14.3`, `frankenphp-1.9-builder-php8.4-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.4-freebsd`, `frankenphp-builder-freebsd`](./8.4-14.3/builder.containerfile) -
 builder image
 
 ## Usage

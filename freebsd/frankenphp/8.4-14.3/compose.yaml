@@ -6,6 +6,7 @@ services:
       args:
         - FREEBSD_VERSION=${FREEBSD_VERSION}
         - PHP_VERSION=${PHP_VERSION}
+        - PHP_SHA256=${PHP_SHA256}
         - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
         - WATCHER_VERSION=${WATCHER_VERSION}
       labels:
@@ -17,6 +18,7 @@ services:
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP_VERSION}-freebsd${FREEBSD_VERSION}"
         - "ghcr.io/dmkos/php:frankenphp-1.9-builder-php8.4-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-1-builder-php8-freebsd"
+        - "ghcr.io/dmkos/php:frankenphp-builder-php8.4-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-builder-freebsd"
     command: "echo 'Build only'"
   runner:
@@ -36,6 +38,7 @@ services:
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-php${PHP_VERSION}-freebsd${FREEBSD_VERSION}"
         - "ghcr.io/dmkos/php:frankenphp-1.9-php8.4-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-1-php8-freebsd"
+        - "ghcr.io/dmkos/php:frankenphp-php8.4-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-freebsd"
     restart: always
     environment:

@@ -73,7 +73,6 @@ RUN set -eux; \
             libiconv \
             libsodium \
             libxml2 \
-            pcre2 \
             sqlite3 \
             # additional
             databases/postgresql17-client \
@@ -116,7 +115,8 @@ COPY --from=composer /usr/bin/composer /usr/local/bin/
 # Copy sysutils
 COPY --from=builder /usr/sbin/chown /usr/sbin/
 
-COPY --chmod=755 sbin/podman-php-entrypoint sbin/podman-php-fix-permissions /usr/local/sbin/
+COPY --chmod=755 bin/podman-php-entrypoint /usr/local/bin/
+COPY --chmod=755 sbin/podman-php-fix-permissions /usr/local/sbin/
 
 ENV GODEBUG cgocheck=0
 ENV XDG_CONFIG_HOME /var/db/frankenphp/config

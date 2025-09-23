@@ -1,7 +1,7 @@
 ARG FREEBSD_VERSION
 FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
-ARG FREEBSD_VERSION PHP_VERSION FRANKENPHP_VERSION WATCHER_VERSION
+ARG FREEBSD_VERSION PHP_VERSION PHP_SHA256 FRANKENPHP_VERSION WATCHER_VERSION
 
 # Base OS, including `make`, complier, linker and so on
 RUN set -eux; \
@@ -37,7 +37,6 @@ RUN set -eux; \
             libiconv \
             libsodium \
             libxml2 \
-            pcre2 \
             sqlite3; \
         # cleanup to reduce image size
         pkg clean -ay; \
@@ -45,7 +44,7 @@ RUN set -eux; \
 
 # Fetch sources
 ENV PHP_VERSION=$PHP_VERSION
-ENV PHP_SHA256="04cd331380a8683a5c2503938eb51764d48d507c53ad4208d2c82e0eed779a00"
+ENV PHP_SHA256=PHP_SHA256
 RUN set -eux; \
         fetch -o /usr/src/php.tar.xz https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz; \
         echo "$PHP_SHA256 /usr/src/php.tar.xz" > /usr/src/checksumfile; \
@@ -55,11 +54,11 @@ RUN set -eux; \
         fetch -o /usr/src/frankenphp.tar.gz https://github.com/php/frankenphp/archive/refs/tags/v${FRANKENPHP_VERSION}.tar.gz; \
         fetch -o /usr/src/watcher.tar.gz https://github.com/e-dant/watcher/archive/refs/tags/${WATCHER_VERSION}.tar.gz
 
-COPY --chmod=755 sbin/podman-php-source sbin/podman-php-ext-* /usr/local/sbin/
+COPY --chmod=755 bin/podman-php-source bin/podman-php-ext-* /usr/local/bin/
 
 # PHP build options for FreeBSD
 ENV PHP_CFLAGS="-O2 -pipe -fstack-protector-strong -isystem /usr/local/include -fno-strict-aliasing"
-ENV PHP_LDFLAGS=" -L/usr/lib -lcrypto -lssl"
+ENV PHP_LDFLAGS="-L/usr/lib -lcrypto -lssl"
 ENV PHP_CXXFLAGS="$PHP_CFLAGS -isystem /usr/local/include"
 ENV PHP_OPENSSL_CFLAGS="-I/usr/include"
 ENV PHP_OPENSSL_LIBS="-L/usr/lib -lssl -lcrypto"
@@ -87,8 +86,8 @@ RUN set -eux; \
             --localstatedir=/var \
             --mandir=/usr/local/share/man \
             # Adapted from Docker
-            --with-config-file-path="/usr/local/etc/php" \
-            --with-config-file-scan-dir="/usr/local/etc/php/conf.d" \
+            --with-config-file-path="$PHP_INI_DIR" \
+            --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \
             --enable-option-checking=fatal \
             --with-mhash \
             --with-pic \
@@ -138,10 +137,9 @@ RUN set -eux; \
 RUN set -eux; \
         tar xzf /usr/src/watcher.tar.gz -C /usr/src; \
         cd /usr/src/watcher-${WATCHER_VERSION}/watcher-c; \
-        # unlike documented, compile possible with c++20 standard
-        c++ -o libwatcher-c.so ./src/watcher-c.cpp -I ./include -I ../include -std=c++20 -fPIC -shared; \
+        c++ -o libwatcher-c.so ./src/watcher-c.cpp -I ./include -I ../include -std=c++17 -fPIC -shared; \
         strip --strip-all libwatcher-c.so; \
-        cp libwatcher-c.so /usr/local/lib/libwatcher-c.so; \
+        cp libwatcher-c.so /usr/local/lib/; \
         cp -R include/wtr /usr/local/include; \
         cd /; \
         rm -rf /usr/src/watcher-${WATCHER_VERSION}
@@ -156,12 +154,13 @@ RUN set -eux; \
         CGO_CFLAGS="-DFRANKENPHP_VERSION=v${FRANKENPHP_VERSION} $(php-config --includes) -I/usr/local/include" \
         CGO_LDFLAGS="$(php-config --ldflags) $(php-config --libs)" \
         go build -tags=nobadger,nomysql,nopgx; \
+        strip --strip-all frankenphp; \
         \
         # smoke test
         ./frankenphp version; \
         mkdir -p /usr/local/etc/frankenphp/Caddyfile.d; \
-        mv frankenphp /usr/local/bin/frankenphp; \
-        cp Caddyfile /usr/local/etc/frankenphp/Caddyfile; \
+        mv frankenphp /usr/local/bin/; \
+        cp Caddyfile /usr/local/etc/frankenphp/; \
         go clean -cache -modcache; \
         cd /; \
         rm -rf /usr/src/frankenphp-${FRANKENPHP_VERSION}
@@ -175,7 +174,7 @@ RUN set -eux; \
         mkdir -p /usr/local/www/app/public; \
         echo '<?php phpinfo(); ?>' > /usr/local/www/app/public/index.php
 
-COPY --chmod=755 sbin/podman-php-entrypoint /usr/local/sbin/
+COPY --chmod=755 bin/podman-php-entrypoint /usr/local/bin/
 ENTRYPOINT ["podman-php-entrypoint"]
 
 WORKDIR /usr/local/www/app
