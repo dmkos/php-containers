@@ -14,10 +14,13 @@ Image published at Container Registry and Docker Hub.
 
 ### Tags
 
-The only tag at the moment is:
+The only supported tag at the moment is:
 
 * [`8.4-fpm-freebsd14.3-pkg`](./8.4/Containerfile): PHP 8.4, FPM, FreeBSD 14.3.
 PHP installed via the package manager.
+
+For historical reasons I decided to keep tags like `8.4.12-fpm-freebsd14.3-pkg`
+indicating PHP version at build time but you should avoid using it.
 
 ### Configuration
 
@@ -47,9 +50,9 @@ podman run -it --rm -v "$PWD":/usr/local/www/html ghcr.io/dmkos/php:8.4-fpm-free
 
 ### Install more PHP extensions
 
-You can do it with `pkg`. The problem (or opportunity) is, when extension
-installed all PHP will be upgraded. From the other hand there are no troubles
-with external dependencies.
+You can do it with `pkg`. When installing new extension PHP and others
+are not automatically upgraded. You should manually upgrade it first to avoid
+possible version conflicts.
 
 Assume you want to install gd along with intl:
 
@@ -58,6 +61,7 @@ FROM ghcr.io/dmkos/php:8.4-fpm-freebsd14.3-pkg
 
 # Install PHP extensions
 RUN set -eux; \
+        pkg upgrade -xy ^php84; \
         pkg install -y \
             php84-gd \
             php84-intl; \
