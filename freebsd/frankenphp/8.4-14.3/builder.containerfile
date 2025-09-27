@@ -44,12 +44,10 @@ RUN set -eux; \
 
 # Fetch sources
 ENV PHP_VERSION=$PHP_VERSION
-ENV PHP_SHA256=PHP_SHA256
+ENV PHP_SHA256=$PHP_SHA256
 RUN set -eux; \
         fetch -o /usr/src/php.tar.xz https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz; \
-        echo "$PHP_SHA256 /usr/src/php.tar.xz" > /usr/src/checksumfile; \
-        sha256sum -c /usr/src/checksumfile; \
-        rm /usr/src/checksumfile; \
+        sha256 -c $PHP_SHA256 /usr/src/php.tar.xz; \
         # For GitHub sources digests are not available
         fetch -o /usr/src/frankenphp.tar.gz https://github.com/php/frankenphp/archive/refs/tags/v${FRANKENPHP_VERSION}.tar.gz; \
         fetch -o /usr/src/watcher.tar.gz https://github.com/e-dant/watcher/archive/refs/tags/${WATCHER_VERSION}.tar.gz
