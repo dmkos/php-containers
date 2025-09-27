@@ -1,0 +1,24 @@
+services:
+  symfony:
+    build:
+      context: .
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lightdemo.rule=Host(`${TRAEFIK_HOST:-demo.lighttpd.local}`)
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+      SYMFONY_TRUSTED_PROXIES: private_ranges
+    volumes:
+      - ./config:/usr/local/etc/lighttpd/conf.d
+      # no data persistence for this example
+  proxy:
+    image: traefik:v3
+    # this is very basic configuration, please do not use in production
+    command:
+      - --api.insecure=true
+      - --providers.docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
