@@ -199,3 +199,4 @@ USER $WWWUSER
 PHP images (Apache, Nginx) with [s6-overlay](https://github.com/just-containers/s6-overlay)
 init system and different improvements
 * [Traefik: ваш прокcи для веб-приложений Docker](https://comp.dmkos.ru/publ/traefik-vas-prokci-dla-veb-prilozenij-docker/) - my Traefik overview (ru)
+* [Образ Lighttpd для Docker и Traefik](https://comp.dmkos.ru/publ/obraz-lighttpd-dla-docker-i-traefik/)
