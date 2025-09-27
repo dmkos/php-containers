@@ -1,0 +1,31 @@
+services:
+  lighttpd:
+    build:
+      context: .
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - LIGHTTPD_SHA256=${LIGHTTPD_SHA256}
+      labels:
+        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM (debian based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:8-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:lighttpd-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd"
+        - "ghcr.io/dmkos/php:8.4-lighttpd"
+        - "ghcr.io/dmkos/php:8-lighttpd"
+        - "ghcr.io/dmkos/php:lighttpd"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lightrix.rule=Host(`trixie.lighttpd.local`)
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d
