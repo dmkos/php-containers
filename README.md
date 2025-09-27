@@ -16,6 +16,7 @@ Specify tag from list below.
 * [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
 * [`frankenphp-1.9.1-php8.4.12-freebsd14.3`, `frankenphp-1.9-php8.4-freebsd14`, `frankenphp-1-php8-freebsd`, `frankenphp-php8.4-freebsd`, `frankenphp-freebsd`](./freebsd/frankenphp/8.4-14.3/runner.containerfile)
 * [`frankenphp-1.9.1-builder-php8.4.12-freebsd14.3`, `frankenphp-1.9-builder-php8.4-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.4-freebsd`, `frankenphp-builder-freebsd`](./freebsd/frankenphp/8.4-14.3/builder.containerfile)
+* [`8.4.13-lighttpd-1.4.82-trixie`, `8.4.13-lighttpd-trixie`, `8.4-lighttpd-trixie`, `8-lighttpd-trixie`, `lighttpd-trixie`, `8.4.13-lighttpd`, `8.4-lighttpd`, `8-lighttpd`, `lighttpd`](./linux/lighttpd/8.4/trixie/Dockerfile)
 
 ## FreeBSD
 
@@ -36,6 +37,20 @@ to run under unprivileged `www` user and also includes some additional PHP
 extensions and `composer`.
 
 [README.md](./freebsd/frankenphp/README.md)
+
+## Linux
+
+Linux containers probably will be used with Docker. Installation methods vary,
+the most common are described in the [documentation](https://docs.docker.com/engine/install/).
+
+### Lighttpd
+
+Lighttpd web server on top of php:fpm official image. Containers are intended
+to be used with reverse proxy such as Traefik (recommended), therefore access
+logs are disabled. The server is built from source and listens 9000 port
+(while PHP-FPM - socket).
+
+[README.md](./linux/lighttpd/README.md)
 
 ## Feedback
 
