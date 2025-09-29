@@ -13,7 +13,7 @@ Specify tag from list below.
 
 ## Supported tags
 
-* [`8.4-fpm-freebsd14.3-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
+* [`8.4-fpm-freebsd14.3-pkg`, `8.4-fpm-freebsd-pkg`](./freebsd/fpm-pkg/8.4/Containerfile)
 * [`frankenphp-1.9.1-php8.4.13-freebsd14.3`, `frankenphp-1.9-php8.4-freebsd14`, `frankenphp-1-php8-freebsd`, `frankenphp-php8.4-freebsd`, `frankenphp-freebsd`](./freebsd/frankenphp/8.4-14.3/runner.containerfile)
 * [`frankenphp-1.9.1-builder-php8.4.13-freebsd14.3`, `frankenphp-1.9-builder-php8.4-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.4-freebsd`, `frankenphp-builder-freebsd`](./freebsd/frankenphp/8.4-14.3/builder.containerfile)
 * [`8.4.13-lighttpd-1.4.82-trixie`, `8.4.13-lighttpd-trixie`, `8.4-lighttpd-trixie`, `8-lighttpd-trixie`, `lighttpd-trixie`, `8.4.13-lighttpd`, `8.4-lighttpd`, `8-lighttpd`, `lighttpd`](./linux/lighttpd/8.4/trixie/Dockerfile)

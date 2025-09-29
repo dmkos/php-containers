@@ -13,6 +13,7 @@ services:
       tags:
         - "ghcr.io/dmkos/php:${PHP_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.4-fpm-freebsd-pkg"
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
