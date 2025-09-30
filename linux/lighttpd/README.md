@@ -191,6 +191,7 @@ USER $WWWUSER
 ### Examples
 
 * [Symfony Demo Application](./examples/demo) - basic usage with no persistence
+* [Yii 2 Advanced Application](./examples/yii2-app-advanced) - serving several hosts
 
 ## Links
 

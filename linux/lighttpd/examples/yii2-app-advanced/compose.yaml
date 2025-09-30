@@ -1,0 +1,24 @@
+services:
+  php:
+    build: .
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.yii2adv.rule=Host(`${BACKEND_HOSTNAME:-back.lighttpd.local}`) || Host(`${FRONTEND_HOSTNAME:-front.lighttpd.local}`)
+    environment:
+      #LIGHTTPD_DOCUMENT_ROOT: /var/www/html/frontend/web
+      BACKEND_HOSTNAME: ${BACKEND_HOSTNAME:-back.lighttpd.local}
+      FRONTEND_HOSTNAME: ${FRONTEND_HOSTNAME:-front.lighttpd.local}
+    volumes:
+      - ./config:/usr/local/etc/lighttpd/conf.d
+      - ./src:/var/www/html
+  proxy:
+    image: traefik:v3
+    # this is very basic configuration, please do not use in production
+    command:
+      - --api.insecure=true
+      - --providers.docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
