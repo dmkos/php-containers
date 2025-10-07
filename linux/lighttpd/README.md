@@ -9,10 +9,11 @@ The server is built from source and listens 9000 port (while PHP-FPM - socket).
 
 ## Supported tags
 
-Naming scheme follows official `php:apache` combinations with additional tag
-indicating exact Lighttpd version. I suggest using a tag like `8.4-lighttpd`.
+Naming scheme follows official `php:apache` combinations with additional tags
+indicating Lighttpd versions. I suggest using a tag like `8.4-lighttpd` or `8.4-lighttpd-s6`.
 
 * [`8.4.13-lighttpd-1.4.82-trixie`, `8.4.13-lighttpd-trixie`, `8.4-lighttpd-trixie`, `8-lighttpd-trixie`, `lighttpd-trixie`, `8.4.13-lighttpd`, `8.4-lighttpd`, `8-lighttpd`, `lighttpd`](./8.4/trixie/Dockerfile) - unprivileged Debian-based image
+* [`8.4.13-lighttpd-1.4.82-s6-trixie`, `8.4.13-lighttpd-1.4-s6-trixie`, `8.4.13-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.13-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./8.4/trixie/s6.dockerfile) - s6-overlay Debian-based image
 
 Images can be found on GitHub and Docker Hub:
 
@@ -23,18 +24,33 @@ The latter used in examples below.
 
 ## Usage
 
+Differences between the image variants are shown in a table below.
+
+|   | unprivileged | s6 |
+| - | ------------ | -- |
+| Init system | [Docker CMD](https://docs.docker.com/reference/dockerfile/#cmd) | [s6-overlay](https://github.com/just-containers/s6-overlay) |
+| PHP-FPM running method | [`mod_fastcgi`](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_fastcgi) | s6 service |
+| [USER](https://docs.docker.com/reference/dockerfile/#user) | `www-data` | `root` |
+| Web-server and php-fpm pool user | depending on USER | `www-data` (customizable) |
+| Graceful shutdown | ? | ✓ |
+| [`composer`](https://getcomposer.org/download/), `unzip` | ✓ | ✓ |
+| [`php-fpm-healthcheck`](https://github.com/renatomefi/php-fpm-healthcheck), `cgi-fcgi` | ✗ | ✓ |
+
+> [!caution]
+> In the unprivileged image guarantee of graceful shutdown is for Lighttpd only.
+
+s6 images are considered to be more general-purpose. The main factors in
+choosing the variant probably will be the USER directive and PHP-FPM graceful
+shutdown.
+
 In order for popular PHP frameworks to work at least you need to define URL
 rewrite rules and override the server's document root.
 
-> [!important]
-> Unprivileged image have `www-data` (33:33) user set explicitly.
-
-> [!note]
-> `composer` and `unzip` are both included.
-
 ### Environment variables
 
-The following environment variables are used and exposed in the dockerfile:
+The following environment variables are used and exposed in the dockerfile.
+
+#### All variants
 
 * `LIGHTTPD_PORT` - web server port, default `9000`;
 * `LIGHTTPD_DOCUMENT_ROOT` - web server document root, default `/var/www/html`.
@@ -43,6 +59,14 @@ Override depending on application design;
 Leading slash is required. Requested resource must return HTTP code `200`. 
 By default script is polling the Lighttpd [status](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_status).
 I recommend using a specific endpoint, e.g. `/up` for [Laravel](https://laravel.com/docs/12.x/deployment#the-health-route).
+
+#### s6-overlay only
+
+* `LIGHTTPD_MAX_FDS` - maximum number of file descriptors served by web server, default `1024`.
+[Increase](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_Performance#lighttpd-configuration-tuning-for-high-traffic-sites-with-a-large-number-of-connections)
+in case of high traffic site;
+* `WWW_USER` - owner of web-server and php-fpm pool processes, default `www-data`;
+* `FCGI_CONNECT` - path to PHP-FPM socket, default `/tmp/www.sock`.
 
 ### Configure Lighttpd
 
@@ -171,7 +195,9 @@ services:
 ### Arbitrary user
 
 If you're not happy with `www-data` for some reason (usually it is related
-to file permissions of your source code), here is how to create custom user:
+to file permissions of your source code), here is how to create custom user.
+
+#### Unprivileged image
 
 ```dockerfile
 FROM dmkos/php:8.4-lighttpd
@@ -188,10 +214,38 @@ RUN set -eux; \
 USER $WWWUSER
 ```
 
+#### s6-overlay image
+
+The difference is that you don't need to switch to root user first but you have
+to change the value of `WWW_USER` environment variable.
+
+```dockerfile
+FROM dmkos/php:8.4-lighttpd-s6
+
+ARG WWW_UID=1000
+ARG WWW_USER=lighty
+# change environment variable accordingly
+ENV WWW_USER=$WWW_USER
+
+RUN set -eux; \
+        useradd -m -c 'World Wide Web Owner' -u $WWW_UID $WWW_USER; \
+        chown -R ${WWW_USER}:${WWW_USER} /var/www/html
+```
+
+It is possible to choose a new user, but it has some
+[limitations](https://github.com/just-containers/s6-overlay#user-directive)
+and is not recommended.
+
+```dockerfile
+# switch to the newly created user if you really want to
+USER $WWW_USER
+```
+
 ### Examples
 
 * [Symfony Demo Application](./examples/demo) - basic usage with no persistence
 * [Yii 2 Advanced Application](./examples/yii2-app-advanced) - serving several hosts
+* [s6-non-root](./examples/s6-non-root/Dockerfile) - unprivileged mode of the s6 image variant
 
 ## Links
 
@@ -201,3 +255,4 @@ PHP images (Apache, Nginx) with [s6-overlay](https://github.com/just-containers/
 init system and different improvements
 * [Traefik: ваш прокcи для веб-приложений Docker](https://comp.dmkos.ru/publ/traefik-vas-prokci-dla-veb-prilozenij-docker/) - my Traefik overview (ru)
 * [Образ Lighttpd для Docker и Traefik](https://comp.dmkos.ru/publ/obraz-lighttpd-dla-docker-i-traefik/)
+* [Система инициализации s6-overlay. Вариант образа Lighttpd для Docker](https://comp.dmkos.ru/publ/sistema-inicializacii-s6-overlay-variant-obraza-lighttpd-dla-docker/)

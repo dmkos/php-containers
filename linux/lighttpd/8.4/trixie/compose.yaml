@@ -29,3 +29,37 @@ services:
     volumes:
       - ./demo/app:/var/www/html
       - ./demo/config:/usr/local/etc/lighttpd/conf.d
+  lighttpd-s6:
+    build:
+      context: .
+      dockerfile: s6.dockerfile
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION}
+      labels:
+        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM (debian based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-s6-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:8-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-s6"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-s6"
+        - "ghcr.io/dmkos/php:8-lighttpd-s6"
+        - "ghcr.io/dmkos/php:lighttpd-s6"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lightrix.rule=Host(`trixie.lighttpd-s6.local`)
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d

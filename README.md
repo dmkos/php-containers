@@ -17,6 +17,7 @@ Specify tag from list below.
 * [`frankenphp-1.9.1-php8.4.13-freebsd14.3`, `frankenphp-1.9-php8.4-freebsd14`, `frankenphp-1-php8-freebsd`, `frankenphp-php8.4-freebsd`, `frankenphp-freebsd`](./freebsd/frankenphp/8.4-14.3/runner.containerfile)
 * [`frankenphp-1.9.1-builder-php8.4.13-freebsd14.3`, `frankenphp-1.9-builder-php8.4-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.4-freebsd`, `frankenphp-builder-freebsd`](./freebsd/frankenphp/8.4-14.3/builder.containerfile)
 * [`8.4.13-lighttpd-1.4.82-trixie`, `8.4.13-lighttpd-trixie`, `8.4-lighttpd-trixie`, `8-lighttpd-trixie`, `lighttpd-trixie`, `8.4.13-lighttpd`, `8.4-lighttpd`, `8-lighttpd`, `lighttpd`](./linux/lighttpd/8.4/trixie/Dockerfile)
+* [`8.4.13-lighttpd-1.4.82-s6-trixie`, `8.4.13-lighttpd-1.4-s6-trixie`, `8.4.13-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.13-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./linux/lighttpd/8.4/trixie/s6.dockerfile)
 
 ## FreeBSD
 
