@@ -1,0 +1,3 @@
+#!/command/execlineb -P
+with-contenv
+/usr/local/sbin/haproxy -W -db -f /usr/local/etc/haproxy/haproxy.cfg

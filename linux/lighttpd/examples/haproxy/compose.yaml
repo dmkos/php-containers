@@ -1,0 +1,26 @@
+services:
+  php:
+    # e.g. balance 3 servers (containers)
+    #deploy:
+    #  replicas: 3
+    image: dmkos/php:lighttpd
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    volumes:
+      - ./config/lighttpd:/usr/local/etc/lighttpd/conf.d
+      - ./src:/var/www/html
+  web:
+    build:
+      context: .
+      dockerfile: hap.dockerfile
+    environment:
+      DOMAIN_NAME: $DOMAIN_NAME
+      CONTACT_EMAIL: $CONTACT_EMAIL
+    depends_on:
+      - php
+    ports:
+      - "80:8000"
+      - "443:8443"
+    volumes:
+      - ./config/haproxy:/usr/local/etc/haproxy
+      - ./certs:/etc/letsencrypt

@@ -1,0 +1,1 @@
+echo "Dumping SSL certificate on exit enabled"

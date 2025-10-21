@@ -1,0 +1,19 @@
+#!/bin/sh
+if [ ! -s "/etc/letsencrypt/${DOMAIN_NAME}.pem" ]; then
+    echo "Issue self-signed certficate"
+    cd /etc/letsencrypt
+    openssl req -x509 \
+        -newkey rsa:2048 \
+        -keyout cert.key \
+        -out cert.crt \
+        -not_before 20240101000000Z -not_after 20250101000000Z \
+        -nodes \
+        -subj "/C=US/ST=Ohio/L=Columbus/O=MyCompany/CN=${DOMAIN_NAME}"
+    cat cert.key cert.crt > ${DOMAIN_NAME}.pem
+    chmod 600 ${DOMAIN_NAME}.pem
+    rm cert.*
+fi
+if [ ! -s "/etc/letsencrypt/account.key" ]; then
+    echo "Generate account key"
+    openssl genrsa -out /etc/letsencrypt/account.key 2048
+fi

@@ -1,0 +1,6 @@
+#!/bin/sh
+if socat /dev/null TCP:127.0.0.1:9999 ; then
+    echo -n "Dump SSL certificate @certs/${DOMAIN_NAME}... "
+    echo "dump ssl cert @certs/${DOMAIN_NAME}" | socat stdio tcp4-connect:127.0.0.1:9999 > /etc/letsencrypt/${DOMAIN_NAME}.pem
+    echo "done."
+fi
