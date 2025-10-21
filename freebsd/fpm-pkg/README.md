@@ -169,7 +169,7 @@ podman-compose up -d
 During request attempt you will receive `502 Bad Gateway` response with
 logged error like `dial tcp: lookup php on xxx.xxx.xxx.xxx:53: no such host`.
 
-## Links
+## See also
 
 * [Installing Podman on FreeBSD 14.0](https://podman.io/docs/installation#installing-on-freebsd-140)
 * [Образ PHP для Podman во FreeBSD](https://comp.dmkos.ru/publ/obraz-php-dla-podman-vo-freebsd/)

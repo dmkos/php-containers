@@ -310,7 +310,7 @@ Next operations in `runner.containerfile` are about setting up files and
 directories permissions, configure FrankenPHP and the container to run under
 non-root user. Hope it self-documented.
 
-## Links
+## See also
 
 * [Installing Podman on FreeBSD 14.0](https://podman.io/docs/installation#installing-on-freebsd-140)
 * [dunglas/frankenphp - Docker Image](https://hub.docker.com/r/dunglas/frankenphp)

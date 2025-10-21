@@ -59,7 +59,7 @@ Feel free to create any [issues](https://github.com/dmkos/php-containers/issues)
 
 [Pull requests](https://github.com/dmkos/php-containers/pulls) are would be really appreciated.
 
-## Links
+## See also
 
 * [My Docker Hub profile](https://hub.docker.com/u/dmkos)
 * [PHP official images](https://hub.docker.com/_/php)

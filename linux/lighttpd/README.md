@@ -248,7 +248,7 @@ USER $WWW_USER
 * [s6-non-root](./examples/s6-non-root/Dockerfile) - unprivileged mode of the s6 image variant
 * [HAProxy](./examples/haproxy) - reverse proxy usage for SSL termination
 
-## Links
+## See also
 
 * [jitesoft/lighttpd](https://hub.docker.com/r/jitesoft/lighttpd) - Lighttpd images based on Alpine Linux
 * [serversideup/php](https://hub.docker.com/r/serversideup/php) - unprivileged

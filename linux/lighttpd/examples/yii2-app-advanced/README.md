@@ -98,7 +98,7 @@ and follow the link to complete registration.
 
 Log in to the control panel.
 
-## Links
+## See also
 
 * [Installation of Yii 2 Advanced](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md)
 * [Настройка Lighttpd для yii2-app-advanced](https://comp.dmkos.ru/publ/nastrojka-lighttpd-dla-yii2-app-advanced/)
