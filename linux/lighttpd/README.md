@@ -32,6 +32,7 @@ Differences between the image variants are shown in a table below.
 | PHP-FPM running method | [`mod_fastcgi`](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_fastcgi) | s6 service |
 | [USER](https://docs.docker.com/reference/dockerfile/#user) | `www-data` | `root` |
 | Web-server and php-fpm pool user | depending on USER | `www-data` (customizable) |
+| write access log to stderr is allowed | ✓ | ✗ |
 | Graceful shutdown | ? | ✓ |
 | [`composer`](https://getcomposer.org/download/), `unzip` | ✓ | ✓ |
 | [`php-fpm-healthcheck`](https://github.com/renatomefi/php-fpm-healthcheck), `cgi-fcgi` | ✗ | ✓ |
@@ -113,6 +114,8 @@ Nevertheless activating [access logs](https://redmine.lighttpd.net/projects/ligh
 can be done with:
 
 ```conf
+# log to container's log (stderr)
+# unprivileged image only, use regular file with s6
 accesslog.filename = "/proc/self/fd/2"
 ```
 
