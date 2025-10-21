@@ -32,7 +32,7 @@ Differences between the image variants are shown in a table below.
 | PHP-FPM running method | [`mod_fastcgi`](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_fastcgi) | s6 service |
 | [USER](https://docs.docker.com/reference/dockerfile/#user) | `www-data` | `root` |
 | Web-server and php-fpm pool user | depending on USER | `www-data` (customizable) |
-| write access log to stderr is allowed | ✓ | ✗ |
+| Write access log to stderr allowed | ✓ | ✗ |
 | Graceful shutdown | ? | ✓ |
 | [`composer`](https://getcomposer.org/download/), `unzip` | ✓ | ✓ |
 | [`php-fpm-healthcheck`](https://github.com/renatomefi/php-fpm-healthcheck), `cgi-fcgi` | ✗ | ✓ |
