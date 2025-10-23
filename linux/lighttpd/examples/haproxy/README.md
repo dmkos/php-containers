@@ -64,7 +64,7 @@ docker compose up
 Navigate website. Since the certificate was obtained in staging environment, a
 warning will appear. Accept risks and open the site anyway.
 
-Press Ctrl+C to terminate containers.
+Press <kbd>Ctrl+C</kbd> to terminate containers.
 
 ## How certification works
 
