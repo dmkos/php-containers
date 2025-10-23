@@ -247,6 +247,7 @@ USER $WWW_USER
 ### Examples
 
 * [Symfony Demo Application](./examples/demo) - basic usage with no persistence
+* [Traefik](./examples/traefik) - advanced usage with no persistence
 * [Yii 2 Advanced Application](./examples/yii2-app-advanced) - serving several hosts
 * [s6-non-root](./examples/s6-non-root/Dockerfile) - unprivileged mode of the s6 image variant
 * [HAProxy](./examples/haproxy) - reverse proxy usage for SSL termination

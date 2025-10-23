@@ -1,0 +1,31 @@
+providers:
+  docker:
+    exposedByDefault: false
+    endpoint: "tcp://dockerproxy:2375"
+    network: traefik
+
+api: false
+
+entryPoints:
+  web:
+    address: ":8000" # will be routed to port 80
+    http:
+      redirections:
+        entrypoint:
+          to: ":443"
+          scheme: https
+  websecure:
+    asDefault: true
+    address: ":8443" # will be routed to port 443
+    http:
+      tls:
+        certResolver: staging
+    http3:
+      advertisedPort: 443
+
+certificatesResolvers:
+  staging:
+    acme:
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      storage: /etc/traefik/acme.json
+      tlsChallenge: {}

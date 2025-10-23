@@ -1,0 +1,66 @@
+services:
+  php:
+    build:
+      context: .
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.demo.rule=Host(`${DOMAIN_NAME}`) || Host(`www.${DOMAIN_NAME}`)
+      - traefik.http.routers.demo.middlewares=rmindexphp,www-redir,compress
+      - traefik.http.middlewares.rmindexphp.redirectregex.regex=/index\.php(?:/(.*)|$)
+      - traefik.http.middlewares.rmindexphp.redirectregex.replacement=/$${1}
+      - traefik.http.middlewares.www-redir.redirectregex.regex=^https?://www\.(.*)
+      - traefik.http.middlewares.www-redir.redirectregex.replacement=https://$${1}
+      - traefik.http.middlewares.www-redir.redirectregex.permanent=true
+      - traefik.http.middlewares.compress.compress.encodings=zstd,br,gzip
+      - traefik.http.middlewares.compress.compress.excludedContentTypes=image/png,image/jpeg,image/gif,font/*
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    volumes:
+      - ./config/lighttpd:/usr/local/etc/lighttpd/conf.d
+      # no data persistence for this example
+  dockerproxy:
+    image: wollomatic/socket-proxy:1
+    user: "65534:${DOCKERGID:-989}"
+    mem_limit: 64M
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+    command:
+      - '-loglevel=info'
+      - '-listenip=0.0.0.0'
+      - '-allowfrom=web' # allow only hostname "web" to connect
+      - '-allowGET=/v1\..{1,2}/(version|containers/.*|events.*)'
+      - '-allowbindmountfrom=/var/log,/tmp' # restrict bind mounts to specific directories
+      - '-watchdoginterval=3600' # check once per hour for socket availability
+      - '-stoponwatchdog' # halt program on error and let compose restart it
+      - '-shutdowngracetime=5' # wait 5 seconds before shutting down
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - docker-proxynet   # NEVER EVER expose this to the public internet!
+                          # this is a private network only for traefik and socket-proxy
+  web:
+    image: traefik:v3
+    user: "guest"
+    read_only: true
+    depends_on:
+      - dockerproxy
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "80:8000"      # use high ports inside the container so
+      - "443:8443"     # we don't need to be root to bind the ports
+      - "443:8443/udp" # HTTP/3
+    networks:
+      - default
+      - docker-proxynet
+    volumes:
+      - ./config/traefik:/etc/traefik
+
+networks:
+  default:
+    name: traefik
+  docker-proxynet:
+    internal: true
