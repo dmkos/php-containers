@@ -20,6 +20,10 @@ services:
         - "ghcr.io/dmkos/php:frankenphp-1-builder-php8-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-builder-php8.4-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-builder-freebsd"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-frankenphp-${FRANKENPHP_VERSION}-builder-freebsd${FREEBSD_VERSION}"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-1.9-builder-freebsd14"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-builder-freebsd"
+        - "ghcr.io/dmkos/php:8-frankenphp-builder-freebsd"
     command: "echo 'Build only'"
   runner:
     build:
@@ -40,6 +44,10 @@ services:
         - "ghcr.io/dmkos/php:frankenphp-1-php8-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-php8.4-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-freebsd"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-frankenphp-${FRANKENPHP_VERSION}-freebsd${FREEBSD_VERSION}"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-1.9-freebsd14"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-freebsd"
+        - "ghcr.io/dmkos/php:8-frankenphp-freebsd"
     restart: always
     environment:
       FRANKENPHP_CONFIG: |

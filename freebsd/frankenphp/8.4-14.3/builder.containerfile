@@ -1,9 +1,8 @@
 ARG FREEBSD_VERSION
 FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
-ARG FREEBSD_VERSION PHP_VERSION PHP_SHA256 FRANKENPHP_VERSION WATCHER_VERSION
-
 # Base OS, including `make`, complier, linker and so on
+ARG FREEBSD_VERSION
 RUN set -eux; \
         cd /; \
         fetch https://download.freebsd.org/ftp/releases/amd64/amd64/${FREEBSD_VERSION}-RELEASE/base.txz; \
@@ -43,8 +42,9 @@ RUN set -eux; \
         rm -rf /var/db/pkg/repos
 
 # Fetch sources
-ENV PHP_VERSION=$PHP_VERSION
-ENV PHP_SHA256=$PHP_SHA256
+ARG PHP_VERSION PHP_SHA256 FRANKENPHP_VERSION WATCHER_VERSION
+ENV PHP_VERSION=$PHP_VERSION \
+    PHP_SHA256=$PHP_SHA256
 RUN set -eux; \
         fetch -o /usr/src/php.tar.xz https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz; \
         sha256 -c $PHP_SHA256 /usr/src/php.tar.xz; \
@@ -55,12 +55,12 @@ RUN set -eux; \
 COPY --chmod=755 bin/podman-php-source bin/podman-php-ext-* /usr/local/bin/
 
 # PHP build options for FreeBSD
-ENV PHP_CFLAGS="-O2 -pipe -fstack-protector-strong -isystem /usr/local/include -fno-strict-aliasing"
-ENV PHP_LDFLAGS="-L/usr/lib -lcrypto -lssl"
-ENV PHP_CXXFLAGS="$PHP_CFLAGS -isystem /usr/local/include"
-ENV PHP_OPENSSL_CFLAGS="-I/usr/include"
-ENV PHP_OPENSSL_LIBS="-L/usr/lib -lssl -lcrypto"
-ENV PHP_INI_DIR="/usr/local/etc/php"
+ENV PHP_CFLAGS="-O2 -pipe -fstack-protector-strong -isystem /usr/local/include -fno-strict-aliasing" \
+    PHP_LDFLAGS="-L/usr/lib -lcrypto -lssl" \
+    PHP_CXXFLAGS="$PHP_CFLAGS -isystem /usr/local/include" \
+    PHP_OPENSSL_CFLAGS="-I/usr/include" \
+    PHP_OPENSSL_LIBS="-L/usr/lib -lssl -lcrypto" \
+    PHP_INI_DIR="/usr/local/etc/php"
 
 RUN set -eux; \
         podman-php-source extract; \
@@ -164,8 +164,8 @@ RUN set -eux; \
         rm -rf /usr/src/frankenphp-${FRANKENPHP_VERSION}
 
 # Set up directories in FreeBSD style
-ENV XDG_CONFIG_HOME /var/db/frankenphp/config
-ENV XDG_DATA_HOME /var/db/frankenphp/data
+ENV XDG_CONFIG_HOME=/var/db/frankenphp/config \
+    XDG_DATA_HOME=/var/db/frankenphp/data
 RUN set -eux; \
         mkdir -p $XDG_CONFIG_HOME; \
         mkdir -p $XDG_DATA_HOME; \

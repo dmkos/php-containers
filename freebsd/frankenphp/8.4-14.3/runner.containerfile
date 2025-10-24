@@ -118,9 +118,14 @@ COPY --from=builder /usr/sbin/chown /usr/sbin/
 COPY --chmod=755 bin/podman-php-entrypoint /usr/local/bin/
 COPY --chmod=755 sbin/podman-php-fix-permissions /usr/local/sbin/
 
-ENV GODEBUG cgocheck=0
-ENV XDG_CONFIG_HOME /var/db/frankenphp/config
-ENV XDG_DATA_HOME /var/db/frankenphp/data
+ARG PHP_VERSION
+ENV GODEBUG="cgocheck=0" \
+    XDG_CONFIG_HOME=/var/db/frankenphp/config \
+    XDG_DATA_HOME=/var/db/frankenphp/data \
+    PHP_VERSION=$PHP_VERSION \
+    PHP_INI_DIR=/usr/local/etc/php
+
+# Configure
 RUN set -eux; \
         podman-php-fix-permissions; \
         cd /usr/local/bin; \
@@ -129,14 +134,8 @@ RUN set -eux; \
         mkdir -p $XDG_CONFIG_HOME; \
         mkdir -p $XDG_DATA_HOME; \
         # smoke test
-        php --version && frankenphp version
-
-ARG PHP_VERSION
-ENV PHP_VERSION $PHP_VERSION
-ENV PHP_INI_DIR /usr/local/etc/php
-
-# Run as non-root user
-RUN set -eux; \
+        php --version && frankenphp version; \
+        # Run as non-root user
         chown -R www:www $PHP_INI_DIR; \
         chown -R www:www /usr/local/etc/frankenphp; \
         chown -R www:www /usr/local/www/app; \
