@@ -1,0 +1,2 @@
+#!/command/with-contenv sh
+curl -fs http://127.0.0.1:${LIGHTTPD_PORT}/_webserver-status?json && echo

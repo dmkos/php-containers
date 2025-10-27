@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ ! -d "certs" ]; then
+    mkdir certs
+fi
+
+openssl ecparam -name secp384r1 -genkey -param_enc explicit -out certs/selfsigned.key
+chmod 644 certs/selfsigned.key
+
+openssl req -new -sha384 -x509 \
+    -key certs/selfsigned.key \
+    -out certs/selfsigned.pem \
+    -days 360 -nodes \
+    -subj "/C=US/ST=CA/L=Mountain View/O=Example Corp, Inc./CN=trixie.lighttpd.local"

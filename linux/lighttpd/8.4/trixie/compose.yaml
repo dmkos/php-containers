@@ -12,22 +12,38 @@ services:
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-trixie"
+        - "docker.io/dmkos/php:8-lighttpd-trixie"
+        - "docker.io/dmkos/php:lighttpd-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4"
+        - "docker.io/dmkos/php:8.4-lighttpd"
+        - "docker.io/dmkos/php:8-lighttpd"
+        - "docker.io/dmkos/php:lighttpd"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-trixie"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-trixie"
         - "ghcr.io/dmkos/php:8.4-lighttpd-trixie"
         - "ghcr.io/dmkos/php:8-lighttpd-trixie"
         - "ghcr.io/dmkos/php:lighttpd-trixie"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4"
         - "ghcr.io/dmkos/php:8.4-lighttpd"
         - "ghcr.io/dmkos/php:8-lighttpd"
         - "ghcr.io/dmkos/php:lighttpd"
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.lightrix.rule=Host(`trixie.lighttpd.local`)
     environment:
       LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8000:9000"
+      - "8443:9443"
     volumes:
       - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
       - ./demo/config:/usr/local/etc/lighttpd/conf.d
   lighttpd-s6:
     build:
@@ -43,6 +59,18 @@ services:
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-s6-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:8-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-s6"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-s6"
+        - "docker.io/dmkos/php:8.4-lighttpd-s6"
+        - "docker.io/dmkos/php:8-lighttpd-s6"
+        - "docker.io/dmkos/php:lighttpd-s6"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-trixie"
         - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-trixie"
@@ -55,11 +83,12 @@ services:
         - "ghcr.io/dmkos/php:8.4-lighttpd-s6"
         - "ghcr.io/dmkos/php:8-lighttpd-s6"
         - "ghcr.io/dmkos/php:lighttpd-s6"
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.lightrix.rule=Host(`trixie.lighttpd-s6.local`)
     environment:
       LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8006:9000"
+      - "6443:9443"
     volumes:
       - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
       - ./demo/config:/usr/local/etc/lighttpd/conf.d

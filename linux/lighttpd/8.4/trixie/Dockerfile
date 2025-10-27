@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8
+ARG PHP_VERSION=8.4
 FROM php:${PHP_VERSION}-fpm-trixie
 
 # Fetch sources
@@ -15,14 +15,23 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         automake \
-        libtool \
+        libbrotli-dev \
         libpcre2-dev \
-        zlib1g-dev; \
+        libssl-dev \
+        libtool \
+        libzstd-dev \
+        zlib1g-dev \
+    ; \
     # Extract and compile
     tar xJf /usr/src/lighttpd.tar.xz -C /usr/src; \
     cd /usr/src/lighttpd-${LIGHTTPD_VERSION}; \
     ./autogen.sh; \
-    ./configure -C; \
+    ./configure -C \
+        --with-brotli \
+        --with-openssl \
+        --with-zstd \
+    ; \
+    make -j "$(nproc)"; \
     make check; \
     make install; \
     find /usr/local/lib \
@@ -70,6 +79,7 @@ RUN set -eux; \
 # Configure
 COPY lighttpd.conf /etc/lighttpd/
 COPY conf.d/*.conf /etc/lighttpd/conf.d/
+COPY --chmod=755 healthcheck /usr/local/bin/
 
 RUN set -eux; \
     # disable PHP access log
@@ -80,15 +90,13 @@ RUN set -eux; \
     # listen socket
     sed -i -r 's#^listen = 9000$#listen = /tmp/www.sock-0#g' /usr/local/etc/php-fpm.d/zz-docker.conf
 
-ENV LIGHTTPD_PORT=9000
-ENV LIGHTTPD_DOCUMENT_ROOT=/var/www/html
+ENV LIGHTTPD_PORT=9000 \
+    LIGHTTPD_DOCUMENT_ROOT=/var/www/html \
+    HEALTHCHECK_PATH="/_webserver-status?auto"
+
+HEALTHCHECK --interval=1m --timeout=5s --start-period=30s CMD healthcheck
 
 STOPSIGNAL SIGINT
-
-# Configure health check
-ENV HEALTHCHECK_PATH="/_webserver-status?auto"
-COPY --chmod=755 healthcheck /usr/local/bin/
-HEALTHCHECK --interval=1m --timeout=5s --start-period=30s CMD healthcheck
 
 USER www-data
 CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
