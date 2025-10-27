@@ -4,7 +4,8 @@
 [official image](https://hub.docker.com/_/php).
 Containers are intended to use with reverse proxy such as
 [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/)
-(recommended), therefore access logs are disabled.
+(recommended) or [HAProxy](https://hub.docker.com/_/haproxy/),
+therefore access logs are disabled.
 The server is built from source and listens 9000 port (while PHP-FPM - socket).
 
 ## Supported tags
@@ -24,7 +25,7 @@ The latter used in examples below.
 
 ## Usage
 
-Differences between the image variants are shown in a table below.
+Differences between the image variants are shown in a following table.
 
 |   | unprivileged | s6 |
 | - | ------------ | -- |
@@ -83,6 +84,8 @@ written from scratch. Hope you don't have to use such radical method.
 
 And 4th is somehow to combine 1st and 2nd ones.
 
+#### Rewrite URL
+
 E.g. [rewrite URL](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModRewrite)
 for Symfony framework and others with the same principle:
 
@@ -91,12 +94,14 @@ for Symfony framework and others with the same principle:
 url.rewrite-if-not-file = ( "" => "/index.php${url.path}${qsa}" )
 ```
 
+#### Deny .php in upload directory
+
 If uploading files is allowed to your site users I suggest to
 [deny access](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_access)
 to `*.php` files in public directory. E.g.:
 
 ```conf
-$HTTP["url"] =~ "^/upload" {
+$HTTP["url"] =^ "/upload" {
     url.access-deny = ( ".php" )
 }
 ```
@@ -104,12 +109,14 @@ $HTTP["url"] =~ "^/upload" {
 Or you can allow access only to a certain types:
 
 ```conf
-$HTTP["url"] =~ "^/upload" {
+$HTTP["url"] =^ "/upload" {
     url.access-allow = ( ".jpg", ".png" )
 }
 ```
 
-It is better to set up logging and compression at proxy server (Traefik).
+#### Logging
+
+It is better to set up logging at proxy server (Traefik).
 Nevertheless activating [access logs](https://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModAccessLog)
 can be done with:
 
@@ -119,7 +126,10 @@ can be done with:
 accesslog.filename = "/proc/self/fd/2"
 ```
 
-In case of network traffic between the servers you can enable gzip like this:
+#### Compression
+
+In case of network traffic between the servers or lack of algorithms support by
+proxy server (HAProxy) you can enable compression like this:
 
 ```conf
 ##  Output Compression
@@ -130,8 +140,38 @@ In case of network traffic between the servers you can enable gzip like this:
 server.modules += ( "mod_deflate" )
 
 deflate.mimetypes = ( "text/*" )
-deflate.allowed-encodings = ( "gzip", "deflate" )
+deflate.allowed-encodings = ( "zstd", "br", "gzip" )
 ```
+
+#### HTTP/2 protocol
+
+If proxy server and web server communicating by HTTP/1.1 protocol, disable
+the HTTP/2 support:
+
+```conf
+server.feature-flags += ("server.h2proto" => "disable")
+```
+
+If your web server is directly exposed to the internet, disable support of
+HTTP/2 over HTTP (cleartext) protocol for security reasons:
+
+```conf
+server.feature-flags += ( "server.h2c" => "disable" )
+```
+
+#### Critical changes
+
+The `8.4.14-lighttpd-1.4.82-trixie` image version has the following changes
+compared to first published:
+
+* compile Lighttpd with support of OpenSSL as well as the zstd and br compression algorithms;
+* reduce the list of index file names:
+`index-file.names = ( "index.php", "index.html", "index.htm" )`
+* leave only .php in the excluded extensions of static files:
+`static-file.exclude-extensions = ( ".php" )`.
+
+> [!caution]
+> Adapt your Lighttpd configuration in case of using another index files or additional cgi (fastcgi) modules.
 
 ### PHP configuration and extensions
 
@@ -162,39 +202,6 @@ RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 USER www-data
 ```
 
-### Collaboration with Traefik
-
-E.g. compose.yaml:
-
-```yaml
-services:
-  app:
-    build:
-      context: .
-    restart: always
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.example.rule=Host(`example.com`)
-    environment:
-      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
-      SYMFONY_TRUSTED_PROXIES: private_ranges
-    volumes:
-      - ./config:/usr/local/etc/lighttpd/conf.d
-      - ./src:/var/www/html
-  proxy:
-    image: traefik:v3.5
-    restart: always
-    # this is very basic configuration, please do not use in production
-    command:
-      - --api.insecure=true
-      - --providers.docker.exposedbydefault=false
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-```
-
 ### Arbitrary user
 
 If you're not happy with `www-data` for some reason (usually it is related
@@ -208,13 +215,14 @@ FROM dmkos/php:8.4-lighttpd
 # Switch to create user
 USER root
 
-ARG WWWUSER=1000 WWWNAME=lighty
+ARG WWW_UID=1000
+ARG WWW_USER=lighty
 RUN set -eux; \
-        useradd -m -c 'World Wide Web Owner' -u $WWWUSER $WWWNAME; \
-        chown ${WWWUSER}:${WWWUSER} /var/www/html
+        useradd -m -c 'World Wide Web Owner' -u $WWW_UID $WWW_USER; \
+        chown -R ${WWW_USER}:${WWW_USER} /var/www/html
 
 # Switch to newly created user
-USER $WWWUSER
+USER $WWW_USER
 ```
 
 #### s6-overlay image
@@ -246,11 +254,11 @@ USER $WWW_USER
 
 ### Examples
 
-* [Symfony Demo Application](./examples/demo) - basic usage with no persistence
-* [Traefik](./examples/traefik) - advanced usage with no persistence
+* [Symfony Demo Application](./examples/demo) - basic usage with Traefik, no persistence
+* [Traefik](./examples/traefik) - advanced usage close to production environment with no persistence
 * [Yii 2 Advanced Application](./examples/yii2-app-advanced) - serving several hosts
 * [s6-non-root](./examples/s6-non-root/Dockerfile) - unprivileged mode of the s6 image variant
-* [HAProxy](./examples/haproxy) - reverse proxy usage for SSL termination
+* [HAProxy](./examples/haproxy) - using this reverse proxy for SSL termination
 
 ## See also
 

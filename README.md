@@ -47,7 +47,7 @@ the most common are described in the [documentation](https://docs.docker.com/eng
 ### Lighttpd
 
 Lighttpd web server on top of php:fpm official image. Containers are intended
-to be used with reverse proxy such as Traefik (recommended), therefore access
+to be used with reverse proxy such as Traefik or HAPorxy, therefore access
 logs are disabled. The server is built from source and listens 9000 port
 (while PHP-FPM - socket).
 
