@@ -65,6 +65,6 @@ Press <kbd>Ctrl+C</kbd> to terminate containers.
 In other words, any content you've created, edited, etc., will be lost after
 deleting the container.
 
-## Ссылки
+## See also
 
 * [socket-proxy](https://github.com/wollomatic/socket-proxy) - Docker unix socket isolation
