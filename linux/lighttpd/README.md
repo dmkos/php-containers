@@ -5,7 +5,9 @@
 Containers are intended to use with reverse proxy such as
 [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/)
 (recommended) or [HAProxy](https://hub.docker.com/_/haproxy/),
-therefore access logs are disabled.
+therefore access logs are disabled. However, it is also possible to operate
+exposed directly to the internet.
+
 The server is built from source and listens 9000 port (while PHP-FPM - socket).
 
 ## Supported tags
@@ -259,6 +261,7 @@ USER $WWW_USER
 * [Yii 2 Advanced Application](./examples/yii2-app-advanced) - serving several hosts
 * [s6-non-root](./examples/s6-non-root/Dockerfile) - unprivileged mode of the s6 image variant
 * [HAProxy](./examples/haproxy) - using this reverse proxy for SSL termination
+* [Standalone](./examples/standalone) - operate directly exposed to the internet (HTTP/2, TLS)
 
 ## See also
 
