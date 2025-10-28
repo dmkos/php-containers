@@ -1,0 +1,16 @@
+# Below is the minimal configuration, see full example at:
+# https://github.com/dehydrated-io/dehydrated/blob/master/docs/examples/config
+
+# URL to certificate authority or internal preset
+# Presets: letsencrypt, letsencrypt-test, zerossl, google, google-test
+# default: letsencrypt
+CA="letsencrypt-test"
+
+# Which challenge should be used? Currently http-01, dns-01 and tls-alpn-01 are supported
+CHALLENGETYPE="tls-alpn-01"
+
+# Output directory for generated certificates
+CERTDIR="/etc/lighttpd/certs"
+
+# E-mail to use during the registration (default: <unset>)
+#CONTACT_EMAIL=

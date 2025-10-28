@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+fullchain="/etc/lighttpd/certs/${SERVER_NAME}/fullchain.pem"
+
+trap exit TERM
+while :
+do
+    date1=$(stat -c %y "$fullchain")
+    su -s /usr/bin/bash ${WWW_USER} -c "dehydrated -c"
+    
+    date2=$(stat -c %y "$fullchain")
+    if [ "$date2" != "$date1" ]; then
+        s6-svc -1 /var/run/service/lighttpd
+    fi
+
+    # readyness
+    if [ -w "/proc/self/fd/5" ]; then
+        echo >&5
+        exec 5>&-
+    fi
+    
+    sleep $(perl -e 'print 43200 + int(rand(43200))') &
+    wait $!
+done

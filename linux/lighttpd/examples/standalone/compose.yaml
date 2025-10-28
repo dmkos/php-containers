@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+    ports:
+      - "80:9000"
+      - "443:9443"
+    volumes:
+      - ./certs:/etc/lighttpd/certs
+      - ./config:/usr/local/etc/lighttpd/conf.d
+      - ./dehydrated:/usr/local/etc/dehydrated
+      - ./src:/var/www/html

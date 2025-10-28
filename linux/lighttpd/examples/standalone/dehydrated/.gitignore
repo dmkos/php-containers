@@ -1,0 +1,4 @@
+*
+!.gitignore
+!config
+!domains.txt.example

@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+if [ -z "${SERVER_NAME}" ]; then
+    echo 'Error: SERVER_NAME is empty or not set'
+    exit 1
+fi
+if [ -z "${WWW_USER}" ]; then
+    echo 'Error: WWW_USER is empty or not set'
+    exit 1
+fi
+mkdir $SERVER_NAME
+openssl req -new -x509 \
+    -extensions req_ext \
+    -keyout "${SERVER_NAME}/privkey.pem" \
+    -out "${SERVER_NAME}/fullchain.pem" \
+    -days 3 -nodes -config <(cat <<-EOF
+[ req ]
+distinguished_name = dn
+prompt = no
+[ dn ]
+CN = $SERVER_NAME
+[ req_ext ]
+subjectAltName = @san
+[ san ]
+DNS.1 = $SERVER_NAME
+DNS.2 = www.${SERVER_NAME}
+EOF
+)
+chown -R ${WWW_USER}:${WWW_USER} $SERVER_NAME
