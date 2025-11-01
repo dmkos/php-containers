@@ -102,6 +102,32 @@ for Symfony framework and others with the same principle:
 url.rewrite-if-not-file = ( "" => "/index.php${url.path}${qsa}" )
 ```
 
+#### IP address
+
+When working behind a reverse proxy, use
+[`mod_extforward`](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_extforward)
+to determine the client's IP address:
+
+```conf
+# extract the client's "real" IP
+server.modules += ( "mod_extforward" )
+extforward.forwarder = (
+    "10.0.0.0/8" => "trust",
+    "172.16.0.0/12" => "trust",
+    "192.168.0.0/16" => "trust"
+)
+# Traefik: that's it
+# HAProxy: uncomment the following line
+#extforward.hap-PROXY = "enable"
+```
+
+Enable the PROXY protocol in HAProxy backend settings:
+
+```
+backend site
+    server lighty php:9000 send-proxy-v2 check
+```
+
 #### Logging
 
 It is better to set up logging at proxy server (Traefik).
