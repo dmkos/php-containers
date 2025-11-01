@@ -10,4 +10,4 @@ openssl req -new -sha384 -x509 \
     -key certs/selfsigned.key \
     -out certs/selfsigned.pem \
     -days 360 -nodes \
-    -subj "/C=US/ST=CA/L=Mountain View/O=Example Corp, Inc./CN=trixie.lighttpd.local"
+    -subj "/C=US/ST=CA/L=Mountain View/O=Example Corp, Inc./CN=docker.lighttpd.local"
