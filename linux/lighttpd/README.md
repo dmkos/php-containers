@@ -17,6 +17,8 @@ indicating Lighttpd versions. I suggest using a tag like `8.4-lighttpd` or `8.4-
 
 * [`8.4.14-lighttpd-1.4.82-trixie`,    `8.4.14-lighttpd-1.4-trixie`,    `8.4.14-lighttpd-trixie`,    `8.4-lighttpd-1.4-trixie`,    `8.4-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.4.14-lighttpd`,    `8.4-lighttpd-1.4`,    `8.4-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.4/trixie/Dockerfile) - unprivileged Debian-based image
 * [`8.4.14-lighttpd-1.4.82-s6-trixie`, `8.4.14-lighttpd-1.4-s6-trixie`, `8.4.14-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.14-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.4/trixie/s6.dockerfile) - s6-overlay Debian-based image
+* [`8.4.14-lighttpd-1.4.82-alpine`,    `8.4.14-lighttpd-1.4-alpine`,    `8.4.14-lighttpd-alpine`,    `8.4-lighttpd-1.4-alpine`,    `8.4-lighttpd-alpine`,    `8-lighttpd-alpine`,    `lighttpd-alpine`   ](./variations/8.4/alpine/Dockerfile) - unprivileged Alpine-based image
+* [`8.4.14-lighttpd-1.4.82-s6-alpine`, `8.4.14-lighttpd-1.4-s6-alpine`, `8.4.14-lighttpd-s6-alpine`, `8.4-lighttpd-1.4-s6-alpine`, `8.4-lighttpd-s6-alpine`, `8-lighttpd-s6-alpine`, `lighttpd-s6-alpine`](./variations/8.4/alpine/s6.dockerfile) - s6-overlay Alpine-based image
 
 Images can be found on GitHub and Docker Hub:
 
@@ -41,11 +43,15 @@ Differences between the image variants are shown in a following table.
 | [`php-fpm-healthcheck`](https://github.com/renatomefi/php-fpm-healthcheck), `cgi-fcgi` | ✗ | ✓ |
 
 > [!caution]
-> In the unprivileged image guarantee of graceful shutdown is for Lighttpd only.
+> In unprivileged images guarantee of graceful shutdown is for Lighttpd only.
 
 s6 images are considered to be more general-purpose. The main factors in
 choosing the variant probably will be the USER directive and PHP-FPM graceful
 shutdown.
+
+[Alpine](https://hub.docker.com/_/alpine) based variants instead of Debian
+are preferable in terms of image size minimization. However, their performance
+and compatibility with used software should be tested.
 
 In order for popular PHP frameworks to work at least you need to define URL
 rewrite rules and override the server's document root.
