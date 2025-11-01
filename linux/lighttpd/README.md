@@ -15,8 +15,8 @@ The server is built from source and listens 9000 port (while PHP-FPM - socket).
 Naming scheme follows official `php:apache` combinations with additional tags
 indicating Lighttpd versions. I suggest using a tag like `8.4-lighttpd` or `8.4-lighttpd-s6`.
 
-* [`8.4.14-lighttpd-1.4.82-trixie`,    `8.4.14-lighttpd-1.4-trixie`,    `8.4.14-lighttpd-trixie`,    `8.4-lighttpd-1.4-trixie`,    `8.4-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.4.14-lighttpd`,    `8.4-lighttpd-1.4`,    `8.4-lighttpd`,    `8-lighttpd`,    `lighttpd`](./8.4/trixie/Dockerfile) - unprivileged Debian-based image
-* [`8.4.14-lighttpd-1.4.82-s6-trixie`, `8.4.14-lighttpd-1.4-s6-trixie`, `8.4.14-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.14-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./8.4/trixie/s6.dockerfile) - s6-overlay Debian-based image
+* [`8.4.14-lighttpd-1.4.82-trixie`,    `8.4.14-lighttpd-1.4-trixie`,    `8.4.14-lighttpd-trixie`,    `8.4-lighttpd-1.4-trixie`,    `8.4-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.4.14-lighttpd`,    `8.4-lighttpd-1.4`,    `8.4-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.4/trixie/Dockerfile) - unprivileged Debian-based image
+* [`8.4.14-lighttpd-1.4.82-s6-trixie`, `8.4.14-lighttpd-1.4-s6-trixie`, `8.4.14-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.14-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.4/trixie/s6.dockerfile) - s6-overlay Debian-based image
 
 Images can be found on GitHub and Docker Hub:
 

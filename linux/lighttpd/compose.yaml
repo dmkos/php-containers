@@ -1,7 +1,8 @@
 services:
-  lighttpd:
+  84-trixie:
     build:
       context: .
+      dockerfile: variations/8.4/trixie/Dockerfile
       args:
         - PHP_VERSION=${PHP_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
@@ -45,10 +46,10 @@ services:
       - ./demo/app:/var/www/html
       - ./demo/certs:/etc/lighttpd/certs
       - ./demo/config:/usr/local/etc/lighttpd/conf.d
-  lighttpd-s6:
+  84-s6-trixie:
     build:
       context: .
-      dockerfile: s6.dockerfile
+      dockerfile: variations/8.4/trixie/s6.dockerfile
       args:
         - PHP_VERSION=${PHP_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
