@@ -102,26 +102,6 @@ for Symfony framework and others with the same principle:
 url.rewrite-if-not-file = ( "" => "/index.php${url.path}${qsa}" )
 ```
 
-#### Deny .php in upload directory
-
-If uploading files is allowed to your site users I suggest to
-[deny access](https://redmine.lighttpd.net/projects/lighttpd/wiki/Mod_access)
-to `*.php` files in public directory. E.g.:
-
-```conf
-$HTTP["url"] =^ "/upload" {
-    url.access-deny = ( ".php" )
-}
-```
-
-Or you can allow access only to a certain types:
-
-```conf
-$HTTP["url"] =^ "/upload" {
-    url.access-allow = ( ".jpg", ".png" )
-}
-```
-
 #### Logging
 
 It is better to set up logging at proxy server (Traefik).
