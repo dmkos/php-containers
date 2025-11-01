@@ -146,13 +146,9 @@ In case of network traffic between the servers or lack of algorithms support by
 proxy server (HAProxy) you can enable compression like this:
 
 ```conf
-##  Output Compression
-## --------------------
-##
-## https://wiki.lighttpd.net/mod_deflate
-##
+# Output compression
+# https://wiki.lighttpd.net/mod_deflate
 server.modules += ( "mod_deflate" )
-
 deflate.mimetypes = ( "text/*" )
 deflate.allowed-encodings = ( "zstd", "br", "gzip" )
 ```
