@@ -79,7 +79,7 @@ RUN set -eux; \
 # Configure
 COPY lighttpd.conf /etc/lighttpd/
 COPY conf.d/*.conf /etc/lighttpd/conf.d/
-COPY --chmod=755 healthcheck /usr/local/bin/
+COPY --chmod=755 variations/8.4/trixie/healthcheck /usr/local/bin/
 
 RUN set -eux; \
     # disable PHP access log
