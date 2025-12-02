@@ -1,38 +1,182 @@
 services:
+  84-trixie:
+    build:
+      context: .
+      dockerfile: variations/8.4/trixie/Dockerfile
+      args:
+        - PHP_VERSION=${PHP84_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - LIGHTTPD_SHA256=${LIGHTTPD_SHA256}
+      labels:
+        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM 8.4 (debian based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4"
+        - "docker.io/dmkos/php:8.4-lighttpd"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4"
+        - "ghcr.io/dmkos/php:8.4-lighttpd"
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8000:9000"
+      - "8443:9443"
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d
+  84-s6-trixie:
+    build:
+      context: .
+      dockerfile: variations/8.4/trixie/s6.dockerfile
+      args:
+        - PHP_VERSION=${PHP84_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION}
+      labels:
+        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM 8.4 (debian based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-s6-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-s6-trixie"
+        - "docker.io/dmkos/php:8.4-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-s6"
+        - "docker.io/dmkos/php:8.4-lighttpd-s6"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-s6-trixie"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-s6"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-s6"
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8000:9000"
+      - "8443:9443"
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d
+  84-alpine:
+    build:
+      context: .
+      dockerfile: variations/8.4/alpine/Dockerfile
+      args:
+        - PHP_VERSION=${PHP84_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - LIGHTTPD_SHA256=${LIGHTTPD_SHA256}
+      labels:
+        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM 8.4 (alpine based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-alpine"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-alpine"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-alpine"
+        - "docker.io/dmkos/php:8.4-lighttpd-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-alpine"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-alpine"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-alpine"
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8000:9000"
+      - "8443:9443"
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d
+  84-s6-alpine:
+    build:
+      context: .
+      dockerfile: variations/8.4/alpine/s6.dockerfile
+      args:
+        - PHP_VERSION=${PHP84_VERSION}
+        - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
+        - S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION}
+      labels:
+        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM 8.4 (alpine based)"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-s6-alpine"
+        - "docker.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6-alpine"
+        - "docker.io/dmkos/php:8.4-lighttpd-1.4-s6-alpine"
+        - "docker.io/dmkos/php:8.4-lighttpd-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-1.4-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-lighttpd-s6-alpine"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-1.4-s6-alpine"
+        - "ghcr.io/dmkos/php:8.4-lighttpd-s6-alpine"
+    environment:
+      LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
+    ports:
+      - "8000:9000"
+      - "8443:9443"
+    volumes:
+      - ./demo/app:/var/www/html
+      - ./demo/certs:/etc/lighttpd/certs
+      - ./demo/config:/usr/local/etc/lighttpd/conf.d
   85-trixie:
     build:
       context: .
       dockerfile: variations/8.5/trixie/Dockerfile
       args:
-        - PHP_VERSION=${PHP_VERSION}
+        - PHP_VERSION=${PHP85_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
         - LIGHTTPD_SHA256=${LIGHTTPD_SHA256}
       labels:
-        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM (debian based)"
+        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM 8.5 (debian based)"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-trixie"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4-trixie"
         - "docker.io/dmkos/php:8.5-lighttpd-trixie"
         - "docker.io/dmkos/php:8-lighttpd-trixie"
         - "docker.io/dmkos/php:lighttpd-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4"
         - "docker.io/dmkos/php:8.5-lighttpd"
         - "docker.io/dmkos/php:8-lighttpd"
         - "docker.io/dmkos/php:lighttpd"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-trixie"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4-trixie"
         - "ghcr.io/dmkos/php:8.5-lighttpd-trixie"
         - "ghcr.io/dmkos/php:8-lighttpd-trixie"
         - "ghcr.io/dmkos/php:lighttpd-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4"
         - "ghcr.io/dmkos/php:8.5-lighttpd"
         - "ghcr.io/dmkos/php:8-lighttpd"
@@ -51,35 +195,35 @@ services:
       context: .
       dockerfile: variations/8.5/trixie/s6.dockerfile
       args:
-        - PHP_VERSION=${PHP_VERSION}
+        - PHP_VERSION=${PHP85_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
         - S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION}
       labels:
-        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM (debian based)"
+        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM 8.5 (debian based)"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-s6-trixie"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6-trixie"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4-s6-trixie"
         - "docker.io/dmkos/php:8.5-lighttpd-s6-trixie"
         - "docker.io/dmkos/php:8-lighttpd-s6-trixie"
         - "docker.io/dmkos/php:lighttpd-s6-trixie"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-s6"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4-s6"
         - "docker.io/dmkos/php:8.5-lighttpd-s6"
         - "docker.io/dmkos/php:8-lighttpd-s6"
         - "docker.io/dmkos/php:lighttpd-s6"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-s6-trixie"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6-trixie"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4-s6-trixie"
         - "ghcr.io/dmkos/php:8.5-lighttpd-s6-trixie"
         - "ghcr.io/dmkos/php:8-lighttpd-s6-trixie"
         - "ghcr.io/dmkos/php:lighttpd-s6-trixie"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4-s6"
         - "ghcr.io/dmkos/php:8.5-lighttpd-s6"
         - "ghcr.io/dmkos/php:8-lighttpd-s6"
@@ -87,8 +231,8 @@ services:
     environment:
       LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
     ports:
-      - "8006:9000"
-      - "6443:9443"
+      - "8000:9000"
+      - "8443:9443"
     volumes:
       - ./demo/app:/var/www/html
       - ./demo/certs:/etc/lighttpd/certs
@@ -98,25 +242,25 @@ services:
       context: .
       dockerfile: variations/8.5/alpine/Dockerfile
       args:
-        - PHP_VERSION=${PHP_VERSION}
+        - PHP_VERSION=${PHP85_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
         - LIGHTTPD_SHA256=${LIGHTTPD_SHA256}
       labels:
-        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM (alpine based)"
+        - "org.opencontainers.image.description=Unprivileged Lighttpd image on top of PHP-FPM 8.5 (alpine based)"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-alpine"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-alpine"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4-alpine"
         - "docker.io/dmkos/php:8.5-lighttpd-alpine"
         - "docker.io/dmkos/php:8-lighttpd-alpine"
         - "docker.io/dmkos/php:lighttpd-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-alpine"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4-alpine"
         - "ghcr.io/dmkos/php:8.5-lighttpd-alpine"
         - "ghcr.io/dmkos/php:8-lighttpd-alpine"
@@ -124,8 +268,8 @@ services:
     environment:
       LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
     ports:
-      - "8080:9000"
-      - "8463:9443"
+      - "8000:9000"
+      - "8443:9443"
     volumes:
       - ./demo/app:/var/www/html
       - ./demo/certs:/etc/lighttpd/certs
@@ -135,25 +279,25 @@ services:
       context: .
       dockerfile: variations/8.5/alpine/s6.dockerfile
       args:
-        - PHP_VERSION=${PHP_VERSION}
+        - PHP_VERSION=${PHP85_VERSION}
         - LIGHTTPD_VERSION=${LIGHTTPD_VERSION}
         - S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION}
       labels:
-        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM (alpine based)"
+        - "org.opencontainers.image.description=s6-overlay Lighttpd image on top of PHP-FPM 8.5 (alpine based)"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-alpine"
-        - "docker.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-s6-alpine"
+        - "docker.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6-alpine"
         - "docker.io/dmkos/php:8.5-lighttpd-1.4-s6-alpine"
         - "docker.io/dmkos/php:8.5-lighttpd-s6-alpine"
         - "docker.io/dmkos/php:8-lighttpd-s6-alpine"
         - "docker.io/dmkos/php:lighttpd-s6-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-1.4-s6-alpine"
-        - "ghcr.io/dmkos/php:${PHP_VERSION}-lighttpd-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-${LIGHTTPD_VERSION}-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-1.4-s6-alpine"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-lighttpd-s6-alpine"
         - "ghcr.io/dmkos/php:8.5-lighttpd-1.4-s6-alpine"
         - "ghcr.io/dmkos/php:8.5-lighttpd-s6-alpine"
         - "ghcr.io/dmkos/php:8-lighttpd-s6-alpine"
@@ -161,8 +305,8 @@ services:
     environment:
       LIGHTTPD_DOCUMENT_ROOT: /var/www/html/public
     ports:
-      - "8086:9000"
-      - "8663:9443"
+      - "8000:9000"
+      - "8443:9443"
     volumes:
       - ./demo/app:/var/www/html
       - ./demo/certs:/etc/lighttpd/certs

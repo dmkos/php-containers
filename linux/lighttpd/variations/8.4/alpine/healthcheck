@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "${HEALTHCHECK_PATH}" = "/_webserver-status?auto" ]; then
+    (curl -fks http://127.0.0.1:${LIGHTTPD_PORT}/_webserver-status?auto | grep -E "^Uptime: \d+$") || exit 1
+else
+    (curl -fksIL http://127.0.0.1:${LIGHTTPD_PORT}${HEALTHCHECK_PATH}) || exit 1
+fi
