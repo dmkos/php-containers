@@ -15,10 +15,10 @@ The server is built from source and listens 9000 port (while PHP-FPM - socket).
 Naming scheme follows official `php:apache` combinations with additional tags
 indicating Lighttpd versions. I suggest using a tag like `8.5-lighttpd` or `8.5-lighttpd-s6`.
 
-* [`8.5.14-lighttpd-1.4.82-trixie`,    `8.5.14-lighttpd-1.4-trixie`,    `8.5.14-lighttpd-trixie`,    `8.5-lighttpd-1.4-trixie`,    `8.5-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.5.14-lighttpd`,    `8.5-lighttpd-1.4`,    `8.5-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.5/trixie/Dockerfile) - unprivileged Debian-based image
-* [`8.5.14-lighttpd-1.4.82-s6-trixie`, `8.5.14-lighttpd-1.4-s6-trixie`, `8.5.14-lighttpd-s6-trixie`, `8.5-lighttpd-1.4-s6-trixie`, `8.5-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.5.14-lighttpd-s6`, `8.5-lighttpd-1.4-s6`, `8.5-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.5/trixie/s6.dockerfile) - s6-overlay Debian-based image
-* [`8.5.14-lighttpd-1.4.82-alpine`,    `8.5.14-lighttpd-1.4-alpine`,    `8.5.14-lighttpd-alpine`,    `8.5-lighttpd-1.4-alpine`,    `8.5-lighttpd-alpine`,    `8-lighttpd-alpine`,    `lighttpd-alpine`   ](./variations/8.5/alpine/Dockerfile) - unprivileged Alpine-based image
-* [`8.5.14-lighttpd-1.4.82-s6-alpine`, `8.5.14-lighttpd-1.4-s6-alpine`, `8.5.14-lighttpd-s6-alpine`, `8.5-lighttpd-1.4-s6-alpine`, `8.5-lighttpd-s6-alpine`, `8-lighttpd-s6-alpine`, `lighttpd-s6-alpine`](./variations/8.5/alpine/s6.dockerfile) - s6-overlay Alpine-based image
+* [`8.5.0-lighttpd-1.4.82-trixie`,    `8.5.0-lighttpd-1.4-trixie`,    `8.5.0-lighttpd-trixie`,    `8.5-lighttpd-1.4-trixie`,    `8.5-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.5.0-lighttpd`,    `8.5-lighttpd-1.4`,    `8.5-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.5/trixie/Dockerfile) - unprivileged Debian-based image
+* [`8.5.0-lighttpd-1.4.82-s6-trixie`, `8.5.0-lighttpd-1.4-s6-trixie`, `8.5.0-lighttpd-s6-trixie`, `8.5-lighttpd-1.4-s6-trixie`, `8.5-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.5.0-lighttpd-s6`, `8.5-lighttpd-1.4-s6`, `8.5-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.5/trixie/s6.dockerfile) - s6-overlay Debian-based image
+* [`8.5.0-lighttpd-1.4.82-alpine`,    `8.5.0-lighttpd-1.4-alpine`,    `8.5.0-lighttpd-alpine`,    `8.5-lighttpd-1.4-alpine`,    `8.5-lighttpd-alpine`,    `8-lighttpd-alpine`,    `lighttpd-alpine`   ](./variations/8.5/alpine/Dockerfile) - unprivileged Alpine-based image
+* [`8.5.0-lighttpd-1.4.82-s6-alpine`, `8.5.0-lighttpd-1.4-s6-alpine`, `8.5.0-lighttpd-s6-alpine`, `8.5-lighttpd-1.4-s6-alpine`, `8.5-lighttpd-s6-alpine`, `8-lighttpd-s6-alpine`, `lighttpd-s6-alpine`](./variations/8.5/alpine/s6.dockerfile) - s6-overlay Alpine-based image
 
 Images can be found on GitHub and Docker Hub:
 
