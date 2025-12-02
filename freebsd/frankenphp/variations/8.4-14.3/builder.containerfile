@@ -7,7 +7,7 @@ RUN set -eux; \
         cd /; \
         fetch https://download.freebsd.org/ftp/releases/amd64/amd64/${FREEBSD_VERSION}-RELEASE/base.txz; \
         # ignore permission warnings during extraction
-        tar xfm base.txz -C / --keep-old-files --exclude=rescue || true; \
+        tar xf base.txz -C / --keep-old-files --exclude=rescue || true; \
         rm base.txz
 
 # Install software

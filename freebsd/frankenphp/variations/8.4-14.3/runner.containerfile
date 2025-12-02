@@ -13,8 +13,10 @@ RUN set -eux; \
             devel/icu \
             graphics/libavif \
             graphics/png \
-            libgd \
-            x11/libXpm; \
+            graphics/webp \
+            print/freetype2 \
+            x11/libXpm \
+        ; \
         # cleanup to reduce image size
         pkg clean -ay; \
         rm -rf /var/db/pkg/repos
@@ -79,10 +81,12 @@ RUN set -eux; \
             devel/icu \
             graphics/libavif \
             graphics/png \
-            libgd \
+            graphics/webp \
+            print/freetype2 \
             x11/libXpm \
             # composer
-            unzip; \
+            unzip \
+        ; \
         # cleanup to reduce image size
         pkg clean -ay; \
         rm -rf /var/db/pkg/repos
