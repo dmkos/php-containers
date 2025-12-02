@@ -13,12 +13,12 @@ The server is built from source and listens 9000 port (while PHP-FPM - socket).
 ## Supported tags
 
 Naming scheme follows official `php:apache` combinations with additional tags
-indicating Lighttpd versions. I suggest using a tag like `8.4-lighttpd` or `8.4-lighttpd-s6`.
+indicating Lighttpd versions. I suggest using a tag like `8.5-lighttpd` or `8.5-lighttpd-s6`.
 
-* [`8.4.14-lighttpd-1.4.82-trixie`,    `8.4.14-lighttpd-1.4-trixie`,    `8.4.14-lighttpd-trixie`,    `8.4-lighttpd-1.4-trixie`,    `8.4-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.4.14-lighttpd`,    `8.4-lighttpd-1.4`,    `8.4-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.4/trixie/Dockerfile) - unprivileged Debian-based image
-* [`8.4.14-lighttpd-1.4.82-s6-trixie`, `8.4.14-lighttpd-1.4-s6-trixie`, `8.4.14-lighttpd-s6-trixie`, `8.4-lighttpd-1.4-s6-trixie`, `8.4-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.4.14-lighttpd-s6`, `8.4-lighttpd-1.4-s6`, `8.4-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.4/trixie/s6.dockerfile) - s6-overlay Debian-based image
-* [`8.4.14-lighttpd-1.4.82-alpine`,    `8.4.14-lighttpd-1.4-alpine`,    `8.4.14-lighttpd-alpine`,    `8.4-lighttpd-1.4-alpine`,    `8.4-lighttpd-alpine`,    `8-lighttpd-alpine`,    `lighttpd-alpine`   ](./variations/8.4/alpine/Dockerfile) - unprivileged Alpine-based image
-* [`8.4.14-lighttpd-1.4.82-s6-alpine`, `8.4.14-lighttpd-1.4-s6-alpine`, `8.4.14-lighttpd-s6-alpine`, `8.4-lighttpd-1.4-s6-alpine`, `8.4-lighttpd-s6-alpine`, `8-lighttpd-s6-alpine`, `lighttpd-s6-alpine`](./variations/8.4/alpine/s6.dockerfile) - s6-overlay Alpine-based image
+* [`8.5.14-lighttpd-1.4.82-trixie`,    `8.5.14-lighttpd-1.4-trixie`,    `8.5.14-lighttpd-trixie`,    `8.5-lighttpd-1.4-trixie`,    `8.5-lighttpd-trixie`,    `8-lighttpd-trixie`,    `lighttpd-trixie`,    `8.5.14-lighttpd`,    `8.5-lighttpd-1.4`,    `8.5-lighttpd`,    `8-lighttpd`,    `lighttpd`](./variations/8.5/trixie/Dockerfile) - unprivileged Debian-based image
+* [`8.5.14-lighttpd-1.4.82-s6-trixie`, `8.5.14-lighttpd-1.4-s6-trixie`, `8.5.14-lighttpd-s6-trixie`, `8.5-lighttpd-1.4-s6-trixie`, `8.5-lighttpd-s6-trixie`, `8-lighttpd-s6-trixie`, `lighttpd-s6-trixie`, `8.5.14-lighttpd-s6`, `8.5-lighttpd-1.4-s6`, `8.5-lighttpd-s6`, `8-lighttpd-s6`, `lighttpd-s6`](./variations/8.5/trixie/s6.dockerfile) - s6-overlay Debian-based image
+* [`8.5.14-lighttpd-1.4.82-alpine`,    `8.5.14-lighttpd-1.4-alpine`,    `8.5.14-lighttpd-alpine`,    `8.5-lighttpd-1.4-alpine`,    `8.5-lighttpd-alpine`,    `8-lighttpd-alpine`,    `lighttpd-alpine`   ](./variations/8.5/alpine/Dockerfile) - unprivileged Alpine-based image
+* [`8.5.14-lighttpd-1.4.82-s6-alpine`, `8.5.14-lighttpd-1.4-s6-alpine`, `8.5.14-lighttpd-s6-alpine`, `8.5-lighttpd-1.4-s6-alpine`, `8.5-lighttpd-s6-alpine`, `8-lighttpd-s6-alpine`, `lighttpd-s6-alpine`](./variations/8.5/alpine/s6.dockerfile) - s6-overlay Alpine-based image
 
 Images can be found on GitHub and Docker Hub:
 
@@ -194,7 +194,7 @@ were modified, so you configure PHP and install extensions as usual.
 E.g.:
 
 ```dockerfile
-FROM dmkos/php:8.4-lighttpd
+FROM dmkos/php:8.5-lighttpd
 
 # Switch to configure PHP
 USER root
@@ -220,7 +220,7 @@ to file permissions of your source code), here is how to create custom user.
 #### Unprivileged image
 
 ```dockerfile
-FROM dmkos/php:8.4-lighttpd
+FROM dmkos/php:8.5-lighttpd
 
 # Switch to create user
 USER root
@@ -241,7 +241,7 @@ The difference is that you don't need to switch to root user first but you have
 to change the value of `WWW_USER` environment variable.
 
 ```dockerfile
-FROM dmkos/php:8.4-lighttpd-s6
+FROM dmkos/php:8.5-lighttpd-s6
 
 ARG WWW_UID=1000
 ARG WWW_USER=lighty

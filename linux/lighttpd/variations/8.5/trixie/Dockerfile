@@ -1,5 +1,5 @@
-ARG PHP_VERSION=8.4
-FROM php:${PHP_VERSION}-fpm-alpine
+ARG PHP_VERSION=8.5
+FROM php:${PHP_VERSION}-fpm-trixie
 
 # Fetch sources
 ARG LIGHTTPD_VERSION LIGHTTPD_SHA256
@@ -11,17 +11,16 @@ RUN set -eux; \
 # Compile
 RUN set -eux; \
     # Install build tools
-    apk add --no-cache --virtual .build-deps \
-        autoconf \
+    savedAptMark="$(apt-mark showmanual)"; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
         automake \
-        build-base \
-        brotli-dev \
+        libbrotli-dev \
+        libpcre2-dev \
+        libssl-dev \
         libtool \
-        openssl-dev \
-        pcre2-dev \
-        pkgconf \
-        zstd-dev \
-        zlib-dev \
+        libzstd-dev \
+        zlib1g-dev \
     ; \
     # Extract and compile
     tar xJf /usr/src/lighttpd.tar.xz -C /usr/src; \
@@ -37,7 +36,6 @@ RUN set -eux; \
     make install; \
     find /usr/local/lib \
         -type f \
-        -maxdepth 1 \
         -name '*.so' \
         -exec sh -euxc ' \
             strip --strip-all "$@" || : \
@@ -54,23 +52,26 @@ RUN set -eux; \
     make clean; \
     cd /; \
     rm -rf /usr/src/lighttpd-${LIGHTTPD_VERSION}; \
-    \
-    runDeps="$( \
-        scanelf --needed --nobanner --format '%n#p' --recursive /usr/local \
-            | tr ',' '\n' \
-            | sort -u \
-            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-    )"; \
-    apk add --no-cache $runDeps; \
-    \
-    apk del --no-network .build-deps
+    # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
+    apt-mark auto '.*' > /dev/null; \
+    [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    apt-get dist-clean
 
 # install composer from Composer's official Docker image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN set -eux; \
+    # prevent Debian's Lighttpd packages from being installed
+    { \
+        echo 'Package: lighttpd*'; \
+        echo 'Pin: release *'; \
+        echo 'Pin-Priority: -1'; \
+    } > /etc/apt/preferences.d/no-debian-lighttpd; \
     # install unzip for composer
-    apk add --no-cache unzip; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends unzip; \
+    apt-get dist-clean; \
     # composer working directory
     mkdir /var/www/.composer; \
     chown www-data:www-data /var/www/.composer
@@ -78,7 +79,7 @@ RUN set -eux; \
 # Configure
 COPY lighttpd.conf /etc/lighttpd/
 COPY conf.d/*.conf /etc/lighttpd/conf.d/
-COPY --chmod=755 variations/8.4/alpine/healthcheck /usr/local/bin/
+COPY --chmod=755 variations/8.5/trixie/healthcheck /usr/local/bin/
 
 RUN set -eux; \
     # disable PHP access log
