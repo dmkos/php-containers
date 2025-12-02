@@ -2,7 +2,7 @@ services:
   builder:
     build:
       context: .
-      dockerfile: builder.containerfile
+      dockerfile: variations/8.4-14.3/builder.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD_VERSION}
         - PHP_VERSION=${PHP_VERSION}
@@ -28,7 +28,7 @@ services:
   runner:
     build:
       context: .
-      dockerfile: runner.containerfile
+      dockerfile: variations/8.4-14.3/runner.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD_VERSION}
         - PHP_VERSION=${PHP_VERSION}
