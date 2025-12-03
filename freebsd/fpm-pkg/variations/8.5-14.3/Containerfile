@@ -17,7 +17,6 @@ RUN set -eux; \
             ${PHP_PACKAGE}-filter \
             ${PHP_PACKAGE}-iconv \
             ${PHP_PACKAGE}-mbstring \
-            ${PHP_PACKAGE}-opcache \
             ${PHP_PACKAGE}-pdo_sqlite \
             ${PHP_PACKAGE}-phar \
             ${PHP_PACKAGE}-posix \
