@@ -1,8 +1,8 @@
-ARG FREEBSD_VERSION
+ARG FREEBSD_VERSION=14.3
 FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
 # Install software
-ARG PHP_PACKAGE
+ARG PHP_PACKAGE=php85
 RUN set -eux; \
         pkg bootstrap -y; \
         # use the latest packages
