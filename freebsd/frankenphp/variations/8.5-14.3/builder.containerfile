@@ -125,7 +125,7 @@ RUN set -eux; \
         rm -rf /tmp/pear /.pearrc; \
         # smoke test
         php --version; \
-        podman-php-ext-enable opcache; \
+        # PHP 8.5: opcache is enabled by default
         podman-php-ext-enable sodium; \
         cd /; \
 	podman-php-source delete
