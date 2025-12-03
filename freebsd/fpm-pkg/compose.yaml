@@ -1,7 +1,8 @@
 services:
-  php:
+  84-143-php:
     build:
       context: .
+      dockerfile: variations/8.4-14.3/Containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD_VERSION}
         - PHP_PACKAGE=${PHP_PACKAGE}

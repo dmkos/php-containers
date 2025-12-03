@@ -14,7 +14,7 @@ Image published at Container Registry and Docker Hub.
 
 ### Tags
 
-* [`8.4-fpm-freebsd14.3-pkg`, `8.4-fpm-freebsd-pkg`](./8.4/Containerfile): PHP 8.4, FPM, FreeBSD 14.3.
+* [`8.4-fpm-freebsd14.3-pkg`, `8.4-fpm-freebsd-pkg`](./variations/8.4-14.3/Containerfile): PHP 8.4, FPM, FreeBSD 14.3.
 PHP installed via the package manager.
 
 For historical reasons I decided to keep tags like `8.4.12-fpm-freebsd14.3-pkg`
