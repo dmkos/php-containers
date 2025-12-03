@@ -4,7 +4,7 @@
 # Extend builder image by installing PHP extensions and their dependencies.
 
 ARG FRANKENPHP_VERSION PHP_VERSION FREEBSD_VERSION
-FROM docker.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP_VERSION}-freebsd${FREEBSD_VERSION} AS builder
+FROM ghcr.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP_VERSION}-freebsd${FREEBSD_VERSION} AS builder
 
 # Install dependencies
 RUN set -eux; \
@@ -54,7 +54,7 @@ FROM --platform=linux/amd64 docker.io/library/composer:2 AS composer
 # All runtime dependencies should be installed again
 # as we using minimal FreeBSD image.
 
-FROM docker.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
+FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
 # Install dependencies
 RUN set -eux; \

@@ -1,5 +1,5 @@
 ARG FREEBSD_VERSION
-FROM docker.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
+FROM ghcr.io/freebsd/freebsd-runtime:$FREEBSD_VERSION
 
 # Base OS, including `make`, complier, linker and so on
 ARG FREEBSD_VERSION
