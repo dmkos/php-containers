@@ -10,22 +10,22 @@ services:
         - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
         - WATCHER_VERSION=${WATCHER_VERSION}
       labels:
-        - "org.opencontainers.image.description=FrankenPHP builder image for FreeBSD"
+        - "org.opencontainers.image.description=FrankenPHP for PHP 8.4 builder FreeBSD ${FREEBSD_VERSION} image"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
         - "docker.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP84_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:frankenphp-1.10-builder-php8.4-freebsd14"
+        - "docker.io/dmkos/php-freebsd:frankenphp-1.11-builder-php8.4-freebsd14"
         - "docker.io/dmkos/php-freebsd:frankenphp-builder-php8.4-freebsd"
         - "docker.io/dmkos/php-freebsd:${PHP84_VERSION}-frankenphp-${FRANKENPHP_VERSION}-builder-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:8.4-frankenphp-1.10-builder-freebsd14"
+        - "docker.io/dmkos/php-freebsd:8.4-frankenphp-1.11-builder-freebsd14"
         - "docker.io/dmkos/php-freebsd:8.4-frankenphp-builder-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP84_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:frankenphp-1.10-builder-php8.4-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1.11-builder-php8.4-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-builder-php8.4-freebsd"
         - "ghcr.io/dmkos/php:${PHP84_VERSION}-frankenphp-${FRANKENPHP_VERSION}-builder-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:8.4-frankenphp-1.10-builder-freebsd14"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-1.11-builder-freebsd14"
         - "ghcr.io/dmkos/php:8.4-frankenphp-builder-freebsd"
     command: "echo 'Build only'"
   84-143-runner:
@@ -37,22 +37,22 @@ services:
         - PHP_VERSION=${PHP84_VERSION}
         - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
       labels:
-        - "org.opencontainers.image.description=FrankenPHP end-user rootless image for FreeBSD"
+        - "org.opencontainers.image.description=FrankenPHP for PHP 8.4 end-user FreeBSD ${FREEBSD_VERSION} rootless image"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
         - "docker.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-php${PHP84_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:frankenphp-1.10-php8.4-freebsd14"
+        - "docker.io/dmkos/php-freebsd:frankenphp-1.11-php8.4-freebsd14"
         - "docker.io/dmkos/php-freebsd:frankenphp-php8.4-freebsd"
         - "docker.io/dmkos/php-freebsd:${PHP84_VERSION}-frankenphp-${FRANKENPHP_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:8.4-frankenphp-1.10-freebsd14"
+        - "docker.io/dmkos/php-freebsd:8.4-frankenphp-1.11-freebsd14"
         - "docker.io/dmkos/php-freebsd:8.4-frankenphp-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-php${PHP84_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:frankenphp-1.10-php8.4-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1.11-php8.4-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-php8.4-freebsd"
         - "ghcr.io/dmkos/php:${PHP84_VERSION}-frankenphp-${FRANKENPHP_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:8.4-frankenphp-1.10-freebsd14"
+        - "ghcr.io/dmkos/php:8.4-frankenphp-1.11-freebsd14"
         - "ghcr.io/dmkos/php:8.4-frankenphp-freebsd"
     restart: always
     environment:
@@ -82,27 +82,27 @@ services:
         - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
         - WATCHER_VERSION=${WATCHER_VERSION}
       labels:
-        - "org.opencontainers.image.description=FrankenPHP for PHP 8.5 builder FreeBSD image"
+        - "org.opencontainers.image.description=FrankenPHP for PHP 8.5 builder FreeBSD ${FREEBSD_VERSION} image"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
         - "docker.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP85_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:frankenphp-1.10-builder-php8.5-freebsd14"
+        - "docker.io/dmkos/php-freebsd:frankenphp-1.11-builder-php8.5-freebsd14"
         - "docker.io/dmkos/php-freebsd:frankenphp-1-builder-php8-freebsd"
         - "docker.io/dmkos/php-freebsd:frankenphp-builder-php8.5-freebsd"
         - "docker.io/dmkos/php-freebsd:frankenphp-builder-freebsd"
         - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-frankenphp-${FRANKENPHP_VERSION}-builder-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:8.5-frankenphp-1.10-builder-freebsd14"
+        - "docker.io/dmkos/php-freebsd:8.5-frankenphp-1.11-builder-freebsd14"
         - "docker.io/dmkos/php-freebsd:8.5-frankenphp-builder-freebsd"
         - "docker.io/dmkos/php-freebsd:8-frankenphp-builder-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP85_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:frankenphp-1.10-builder-php8.5-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1.11-builder-php8.5-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-1-builder-php8-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-builder-php8.5-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-builder-freebsd"
         - "ghcr.io/dmkos/php:${PHP85_VERSION}-frankenphp-${FRANKENPHP_VERSION}-builder-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:8.5-frankenphp-1.10-builder-freebsd14"
+        - "ghcr.io/dmkos/php:8.5-frankenphp-1.11-builder-freebsd14"
         - "ghcr.io/dmkos/php:8.5-frankenphp-builder-freebsd"
         - "ghcr.io/dmkos/php:8-frankenphp-builder-freebsd"
     command: "echo 'Build only'"
@@ -115,27 +115,27 @@ services:
         - PHP_VERSION=${PHP85_VERSION}
         - FRANKENPHP_VERSION=${FRANKENPHP_VERSION}
       labels:
-        - "org.opencontainers.image.description=FrankenPHP for PHP 8.5 end-user FreeBSD rootless image"
+        - "org.opencontainers.image.description=FrankenPHP for PHP 8.5 end-user FreeBSD ${FREEBSD_VERSION} rootless image"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
         - "docker.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-php${PHP85_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:frankenphp-1.10-php8.5-freebsd14"
+        - "docker.io/dmkos/php-freebsd:frankenphp-1.11-php8.5-freebsd14"
         - "docker.io/dmkos/php-freebsd:frankenphp-1-php8-freebsd"
         - "docker.io/dmkos/php-freebsd:frankenphp-php8.5-freebsd"
         - "docker.io/dmkos/php-freebsd:frankenphp-freebsd"
         - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-frankenphp-${FRANKENPHP_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "docker.io/dmkos/php-freebsd:8.5-frankenphp-1.10-freebsd14"
+        - "docker.io/dmkos/php-freebsd:8.5-frankenphp-1.11-freebsd14"
         - "docker.io/dmkos/php-freebsd:8.5-frankenphp-freebsd"
         - "docker.io/dmkos/php-freebsd:8-frankenphp-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-php${PHP85_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:frankenphp-1.10-php8.5-freebsd14"
+        - "ghcr.io/dmkos/php:frankenphp-1.11-php8.5-freebsd14"
         - "ghcr.io/dmkos/php:frankenphp-1-php8-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-php8.5-freebsd"
         - "ghcr.io/dmkos/php:frankenphp-freebsd"
         - "ghcr.io/dmkos/php:${PHP85_VERSION}-frankenphp-${FRANKENPHP_VERSION}-freebsd${FREEBSD_VERSION}"
-        - "ghcr.io/dmkos/php:8.5-frankenphp-1.10-freebsd14"
+        - "ghcr.io/dmkos/php:8.5-frankenphp-1.11-freebsd14"
         - "ghcr.io/dmkos/php:8.5-frankenphp-freebsd"
         - "ghcr.io/dmkos/php:8-frankenphp-freebsd"
     restart: always
