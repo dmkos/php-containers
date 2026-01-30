@@ -1,15 +1,14 @@
 ARG PHP_VERSION=8.5
 FROM php:${PHP_VERSION}-fpm-trixie
 
-# Fetch sources
+# Copy sources
 ARG LIGHTTPD_VERSION LIGHTTPD_SHA256
-RUN set -eux; \
-    cd /usr/src; \
-    curl -s -o lighttpd.tar.xz https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-${LIGHTTPD_VERSION}.tar.xz; \
-    echo "$LIGHTTPD_SHA256 lighttpd.tar.xz" | sha256sum -c -
+COPY src/lighttpd-${LIGHTTPD_VERSION}.tar.xz /usr/src/lighttpd.tar.xz
     
 # Compile
 RUN set -eux; \
+    # Check sources
+    echo "$LIGHTTPD_SHA256 /usr/src/lighttpd.tar.xz" | sha256sum -c -; \
     # Install build tools
     savedAptMark="$(apt-mark showmanual)"; \
     apt-get update; \

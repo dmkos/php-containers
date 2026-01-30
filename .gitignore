@@ -1,2 +1,5 @@
 # NetBeans project
 /nbproject
+
+# Lighttpd source code
+/linux/lighttpd/src
