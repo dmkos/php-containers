@@ -86,7 +86,7 @@ RUN set -eux; \
     sed -i -r 's#^user = www-data$#;user = www-data#g' /usr/local/etc/php-fpm.d/www.conf; \
     sed -i -r 's#^group = www-data$#;group = www-data#g' /usr/local/etc/php-fpm.d/www.conf; \
     # listen socket
-    sed -i -r 's#^listen = 9000$#listen = /tmp/www.sock-0#g' /usr/local/etc/php-fpm.d/zz-docker.conf
+    echo 'listen = /tmp/www.sock-0' >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
 ENV LIGHTTPD_PORT=9000 \
     LIGHTTPD_DOCUMENT_ROOT=/var/www/html \
