@@ -11,9 +11,11 @@ services:
       tags:
         - "docker.io/dmkos/php-freebsd:${PHP84_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14-pkg"
         - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd-pkg"
         - "ghcr.io/dmkos/php:${PHP84_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.4-fpm-freebsd14-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd-pkg"
     restart: always
     ports:
@@ -30,9 +32,11 @@ services:
       tags:
         - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd14-pkg"
         - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd-pkg"
         - "ghcr.io/dmkos/php:${PHP85_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.5-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.5-fpm-freebsd14-pkg"
         - "ghcr.io/dmkos/php:8.5-fpm-freebsd-pkg"
     restart: always
     ports:
