@@ -33,7 +33,7 @@ Specify tag from list below.
 ## FreeBSD
 
 FreeBSD containers intend to use with Podman. Please install it according to
-[manual](https://podman.io/docs/installation#installing-on-freebsd-140).
+[manual](https://podman.io/docs/installation#installing-on-freebsd).
 
 ### fpm-pkg
 

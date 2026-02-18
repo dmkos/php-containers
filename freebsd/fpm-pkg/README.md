@@ -174,6 +174,6 @@ logged error like `dial tcp: lookup php on xxx.xxx.xxx.xxx:53: no such host`.
 
 ## See also
 
-* [Installing Podman on FreeBSD 14.0](https://podman.io/docs/installation#installing-on-freebsd-140)
+* [Installing Podman on FreeBSD](https://podman.io/docs/installation#installing-on-freebsd)
 * [Образ PHP для Podman во FreeBSD](https://comp.dmkos.ru/publ/obraz-php-dla-podman-vo-freebsd/)
 * [php:8.4-fpm](https://github.com/docker-library/php/blob/master/8.4/trixie/fpm/Dockerfile)
