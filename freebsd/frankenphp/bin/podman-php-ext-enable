@@ -97,5 +97,6 @@ for module in $modules; do
     esac
     if ! grep -qFx -e "$line" -e "$line.so" "$ini" 2>/dev/null; then
         echo "$line" >> "$ini"
+        chmod 644 $ini
     fi
 done

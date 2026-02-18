@@ -1,0 +1,63 @@
+# Composer's official Docker image
+FROM --platform=linux/amd64 docker.io/library/composer:2 AS composer
+
+FROM ghcr.io/dmkos/php:8.5-frankenphp-freebsd-15
+
+# Install dependencies
+RUN set -eux; \
+        pkg install -y \
+            devel/icu \
+            graphics/libavif \
+            graphics/png \
+            graphics/webp \
+            print/freetype2 \
+            x11/libXpm \
+            # Node to build sass
+            www/npm \
+        ; \
+        umask 0022; \
+        npm i -g sass; \
+        # cleanup to reduce image size
+        pkg clean -ay; \
+        rm -rf /var/db/pkg/repos
+
+# Build and install additional PHP extensions
+RUN set -eux; \
+        podman-php-source extract; \
+        podman-php-ext-configure gd --with-webp --with-jpeg --with-xpm --with-freetype --with-avif; \
+        podman-php-ext-install -j"$(nproc)" \
+            gd \
+            intl \
+            pcntl \
+        ; \
+        pecl install \
+            # https://pecl.php.net/package/uploadprogress
+            uploadprogress-2.0.2 \
+        ; \
+        podman-php-ext-enable uploadprogress; \
+        rm -rf /tmp/pear; \
+        podman-php-source delete; \
+        # smoke test
+        php -m | grep -e gd -e intl -e pcntl
+
+# Install composer from image
+COPY --from=composer /usr/bin/composer /usr/local/bin/
+
+# Use the default development configuration
+RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
+# Run as a Non-Root User
+# https://frankenphp.dev/docs/docker/#running-as-a-non-root-user
+ARG USER=www
+RUN set -eux; \
+        # create new user
+        if ! id ${USER}; then \
+            pw useradd ${USER} -m; \
+        fi; \
+        # give write access to internal config and data directories
+        chown -R ${USER}:${USER} /var/db/frankenphp; \
+        # use non-privileged ports (1024 and above)
+        sed -i '' 's/{$CADDY_GLOBAL_OPTIONS}/http_port 10080\n        https_port 10443\n        {$CADDY_GLOBAL_OPTIONS}/' /usr/local/etc/frankenphp/Caddyfile
+
+EXPOSE 10080/tcp 10443/tcp 10443/udp
+USER ${USER}

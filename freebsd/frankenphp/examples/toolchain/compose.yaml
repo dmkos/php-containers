@@ -1,0 +1,24 @@
+services:
+  php:
+    build: .
+    restart: always
+    environment:
+      SERVER_NAME: "${SERVER_NAME:-http://}"
+      FRANKENPHP_CONFIG: |
+        worker {
+          file ./public/index.php
+          num 1
+          watch
+        }
+    ports:
+      - "80:10080" # HTTP
+      - "443:10443" # HTTPS
+      - "443:10443/udp" # HTTP/3
+    volumes:
+      - ./app:/usr/local/www/app
+      - franken_config:/var/db/frankenphp/config
+      - franken_data:/var/db/frankenphp/data
+
+volumes:
+  franken_config:
+  franken_data:

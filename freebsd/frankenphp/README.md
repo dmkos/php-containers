@@ -1,11 +1,13 @@
 # FreeBSD FrankenPHP
 
 [FrankenPHP](https://frankenphp.dev/) images for FreeBSD + Podman.
-Compiling specific versions of PHP itself and FrankenPHP resulted in
-two different containers for build and run in production environment.
+Specific versions of PHP and FrankenPHP are compiled. In FreeBSD 14, this
+resulted as two different containers for build and run in production environment,
+while FreeBSD 15, with the introduction of a base `toolchain` image,
+including compiler, no longer requires separate images.
 
 > [!important]
-> In production image the `www` user (80:80) is set explicitly.
+> In production FreeBSD 14 image the `www` user (80:80) is set explicitly.
 
 ## Tags
 
@@ -15,11 +17,15 @@ fewer combinations along with PHP versions at the beginning. I recommend
 `8.4-frankenphp-freebsd` and `8.4-frankenphp-builder-freebsd`.
 
 * PHP 8.4:
-    * [`8.4.18-frankenphp-1.11.2-freebsd14.3`,         `8.4-frankenphp-1.11-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.11.2-php8.4.18-freebsd14.3`,         `frankenphp-1.11-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.3/runner.containerfile) - end-user "runner" image
-    * [`8.4.18-frankenphp-1.11.2-builder-freebsd14.3`, `8.4-frankenphp-1.11-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.11.2-builder-php8.4.18-freebsd14.3`, `frankenphp-1.11-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.3/builder.containerfile) - builder image
+    * [`8.4.18-frankenphp-1.11.2-freebsd14.3`,         `8.4-frankenphp-1.11-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.11.2-php8.4.18-freebsd14.3`,         `frankenphp-1.11-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.3/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.4.18-frankenphp-1.11.2-builder-freebsd14.3`, `8.4-frankenphp-1.11-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.11.2-builder-php8.4.18-freebsd14.3`, `frankenphp-1.11-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.3/builder.containerfile) - FreeBSD 14 builder image
 * PHP 8.5:
-    * [`8.5.3-frankenphp-1.11.2-freebsd14.3`,         `8.5-frankenphp-1.11-freebsd14`,         `8.5-frankenphp-freebsd`,         `8-frankenphp-freebsd`,         `frankenphp-1.11.2-php8.5.3-freebsd14.3`,         `frankenphp-1.11-php8.5-freebsd14`,         `frankenphp-1-php8-freebsd`,         `frankenphp-php8.5-freebsd`,         `frankenphp-freebsd`        ](./variations/8.5-14.3/runner.containerfile) - end-user "runner" image
-    * [`8.5.3-frankenphp-1.11.2-builder-freebsd14.3`, `8.5-frankenphp-1.11-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`, `8-frankenphp-builder-freebsd`, `frankenphp-1.11.2-builder-php8.5.3-freebsd14.3`, `frankenphp-1.11-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.3/builder.containerfile) - builder image
+    * [`8.5.3-frankenphp-1.11.2-freebsd-15.0`,        `8.5-frankenphp-1.11-freebsd-15`,        `8.5-frankenphp-freebsd-15`,                                      `frankenphp-1.11.2-php8.5.3-freebsd15.0`,         `frankenphp-1.11-php8.5-freebsd15`,                                              `frankenphp-php8.5-freebsd15`                                    ](./variations/8.5-15.0/Containerfile) - single FreeBSD 15 image
+    * [`8.5.3-frankenphp-1.11.2-freebsd14.3`,         `8.5-frankenphp-1.11-freebsd14`,         `8.5-frankenphp-freebsd`,         `8-frankenphp-freebsd`,         `frankenphp-1.11.2-php8.5.3-freebsd14.3`,         `frankenphp-1.11-php8.5-freebsd14`,         `frankenphp-1-php8-freebsd`,         `frankenphp-php8.5-freebsd`,         `frankenphp-freebsd`        ](./variations/8.5-14.3/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.5.3-frankenphp-1.11.2-builder-freebsd14.3`, `8.5-frankenphp-1.11-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`, `8-frankenphp-builder-freebsd`, `frankenphp-1.11.2-builder-php8.5.3-freebsd14.3`, `frankenphp-1.11-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.3/builder.containerfile) - FreeBSD 14 builder image
+
+> [!warning]
+> Since PHP 8.5.4, default tags will be for FreeBSD 15, breaking backward compatibility. Consider upgrade or use a more specific tag.
 
 ## Usage
 
@@ -28,20 +34,30 @@ Images available at Container Registry and Docker Hub.
 * https://github.com/dmkos/php-containers/pkgs/container/php
 * https://hub.docker.com/r/dmkos/php-freebsd
 
-Below is about end-user container.
+Below is about end-user FreeBSD 14 container or the single FreeBSD 15 image.
 
 > [!warning]
 > Never use builder image in production environment.
 
 ### Getting started
 
-Assuming `index.php` is placed in `public` subdirectory of current
-(e.g. Symfony, Laravel):
+Assume `index.php` is placed in `public` subdirectory of current
+(e.g. Symfony, Laravel).
+
+FreeBSD 14:
 
 ```shell
 podman run -v $PWD:/usr/local/www/app \
     -p 80:10080 -p 443:10443 \
     ghcr.io/dmkos/php:frankenphp-freebsd
+```
+
+FreeBSD 15:
+
+```shell
+podman run -v $PWD:/usr/local/www/app \
+    -p 80:80 -p 443:443 \
+    ghcr.io/dmkos/php:8.5-frankenphp-freebsd-15
 ```
 
 Visit `https://localhost` and accept self-signed certificate or run `curl`:
@@ -63,16 +79,45 @@ RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 ### Running as an arbitrary user
 
+#### FreeBSD 14
+
 As mentioned above the runner image is configured for unprivileged `www` user.
 That is why server listens on high port numbers. Source code should be available
 for that user.
 
 The builder image is not attended to run as non-root user.
 
+#### FreeBSD 15
+
+To run as an unprivileged user, you must change the ownership of
+FrankenPHP's internal configuration and data directories, and use
+ports 1024 and above.
+
+```dockerfile
+FROM ghcr.io/dmkos/php:8.5-frankenphp-freebsd-15
+
+# Run as a Non-Root User
+# https://frankenphp.dev/docs/docker/#running-as-a-non-root-user
+ARG USER=www
+RUN set -eux; \
+        # create new user
+        if ! id ${USER}; then \
+            pw useradd ${USER} -m; \
+        fi; \
+        # give write access to internal config and data directories
+        chown -R ${USER}:${USER} /var/db/frankenphp; \
+        # use non-privileged ports (1024 and above)
+        sed -i '' 's/{$CADDY_GLOBAL_OPTIONS}/http_port 10080\n        https_port 10443\n        {$CADDY_GLOBAL_OPTIONS}/' /usr/local/etc/frankenphp/Caddyfile
+
+EXPOSE 10080/tcp 10443/tcp 10443/udp
+USER ${USER}
+```
+
 ### FreeBSD differences
 
-Exposed ports are `10080/tcp` for HTTP, `10443/tcp` for HTTPS and HTTP/2
-among with `10443/udp` for HTTP/3.
+Container for FreeBSD 14 exposes `10080/tcp` port for HTTP,
+`10443/tcp` for HTTPS and HTTP/2 among with `10443/udp` for HTTP/3.
+In FreeBSD 15 the standard ports (80 and 443) are used by default.
 
 Application directory:
 
@@ -173,9 +218,25 @@ Feel free to bind mount directory with additional `*.caddyfile` into
 
 ### Composer
 
-Installed with unzip.
+In FreeBSD 14 it is preinstalled with unzip.
+
+In FreeBSD 15 it is up to you, e.g.:
+
+```dockerfile
+# Composer's official Docker image
+FROM --platform=linux/amd64 docker.io/library/composer:2 AS composer
+
+FROM ghcr.io/dmkos/php:8.5-frankenphp-freebsd-15
+
+# Install composer from image
+COPY --from=composer /usr/bin/composer /usr/local/bin/
+```
+
+## PHP extensions
 
 ### Provided extensions
+
+#### FreeBSD 14
 
 The image includes all "official" extensions as well as:
 
@@ -191,29 +252,9 @@ The image includes all "official" extensions as well as:
 And also PECL [uploadprogress](https://pecl.php.net/package/uploadprogress)
 as an example.
 
-## Builder image
+#### FreeBSD 15
 
-Unfortunately, one does not simply install more PHP extensions. To do that you
-need compiler, linker and other build tools comes with FreeBSD. In other words,
-they cannot be installed via package manager. Therefore, it was decided to
-extract entire base system into image similar to
-[creating a jail](https://docs.freebsd.org/en/books/handbook/jails/#thin-jail).
-
-```Dockerfile
-RUN set -eux; \
-    cd /; \
-    fetch https://download.freebsd.org/ftp/releases/amd64/amd64/${FREEBSD_VERSION}-RELEASE/base.txz; \
-    # ignore permission warnings during extraction
-    tar xf base.txz -C / --keep-old-files --exclude=rescue || true; \
-    rm base.txz
-```
-
-> [!caution]
-> The operation immediately adds about 900 MB to the image.
-
-Other utilities and libraries installed by `pkg`. Visit 
-[FreeBSD FreshPorts](https://www.freshports.org/lang/php84/) to track required
-dependencies.
+The list of extensions corresponds to the official image for Docker.
 
 ### Installing extensions
 
@@ -224,9 +265,6 @@ Please replace `docker` prefix into `podman`: `podman-php-ext-install` and so on
 For example, install gd extension:
 
 ```Dockerfile
-ARG FRANKENPHP_VERSION PHP_VERSION FREEBSD_VERSION
-FROM ghcr.io/dmkos/php:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP_VERSION}-freebsd${FREEBSD_VERSION} AS builder
-
 # Install dependencies
 RUN set -eux; \
     pkg install -y \
@@ -248,15 +286,41 @@ RUN set -eux; \
     php -m | grep gd
 ```
 
+Visit [FreeBSD FreshPorts](https://www.freshports.org/lang/php85/)
+to track required dependencies.
+
+The FreeBSD 14 specifics are discussed below.
+
+## Builder image (FreeBSD 14)
+
+Unfortunately, one does not simply install more PHP extensions. To do that you
+need compiler, linker and other build tools comes with FreeBSD. In other words,
+they cannot be installed via package manager. Therefore, it was decided to
+extract entire base system into image similar to
+[creating a jail](https://docs.freebsd.org/en/books/handbook/jails/#thin-jail).
+
+```Dockerfile
+RUN set -eux; \
+    cd /; \
+    fetch https://download.freebsd.org/ftp/releases/amd64/amd64/${FREEBSD_VERSION}-RELEASE/base.txz; \
+    # ignore permission warnings during extraction
+    tar xf base.txz -C / --keep-old-files --exclude=rescue || true; \
+    rm base.txz
+```
+
+> [!caution]
+> The operation immediately adds about 900 MB to the image.
+
 ### Creating end-user image
 
-You should implement multi-stage build by example of
+To avoid having to drag literally the entire FreeBSD installation to your
+system, you should implement multi-stage build similar to
 [`runner.containerfile`](./variations/8.4-14.3/runner.containerfile).
 At the first stage install additional extensions as described above.
 Then build final image by copying PHP from previous step.
 
 > [!warning]
-> You need to install all external dependencies of PHP and its extensions using `pkg`.
+> You need to install (again) all external dependencies of PHP and its extensions using `pkg`.
 
 ```Dockerfile
 # Install dependencies
@@ -319,5 +383,5 @@ non-root user. Hope it self-documented.
 
 ## See also
 
-* [Installing Podman on FreeBSD 14.0](https://podman.io/docs/installation#installing-on-freebsd-140)
+* [Installing Podman on FreeBSD](https://podman.io/docs/installation#installing-on-freebsd)
 * [dunglas/frankenphp - Docker Image](https://hub.docker.com/r/dunglas/frankenphp)
