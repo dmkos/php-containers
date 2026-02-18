@@ -1,22 +1,23 @@
 services:
   php:
-    image: ghcr.io/dmkos/php:8.4-fpm-freebsd-pkg
+    image: ghcr.io/dmkos/php:8.5-fpm-freebsd15-pkg
     restart: always
     volumes:
       - ./html:/usr/local/www/html
   web:
-    image: docker.io/library/caddy:2
-    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: caddy.containerfile
     restart: always
     depends_on:
       - php
     ports:
       - "80:80"
     volumes:
-      - ./config:/etc/caddy
-      - ./html:/srv
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./config:/usr/local/etc/caddy
+      - ./html:/usr/local/www/html
+      - caddy_data:/var/db/caddy/data
+      - caddy_config:/var/db/caddy/config
 
 volumes:
   caddy_data:

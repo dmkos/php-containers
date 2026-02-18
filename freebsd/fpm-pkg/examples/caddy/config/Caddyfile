@@ -1,8 +1,12 @@
-http:// {
-    root * /srv
-    php_fastcgi php:9000 {
-        root /usr/local/www/html
+{
+    log {
+        level DEBUG
     }
+}
+
+http:// {
+    root * /usr/local/www/html
+    php_fastcgi php:9000
     file_server
 
     handle_errors {

@@ -163,12 +163,9 @@ such situation.
 ### Service discovery
 
 For illustration purposes I have prepared [example](./examples/caddy)
-of simple `compose.yaml` with very basic Caddy configuration. Linux emulation
-must be enabled:
+of simple `compose.yaml` with basic Caddy configuration:
 
 ```shell
-service linux enable
-service linux start
 podman-compose up -d
 ```
 
