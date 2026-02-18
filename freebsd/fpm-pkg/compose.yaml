@@ -9,12 +9,12 @@ services:
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php-freebsd:${PHP84_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:${PHP84_VERSION}-fpm-freebsd${FREEBSD14_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd${FREEBSD14_VERSION}-pkg"
         - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd14-pkg"
         - "docker.io/dmkos/php-freebsd:8.4-fpm-freebsd-pkg"
-        - "ghcr.io/dmkos/php:${PHP84_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "ghcr.io/dmkos/php:8.4-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:${PHP84_VERSION}-fpm-freebsd${FREEBSD14_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.4-fpm-freebsd${FREEBSD14_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd14-pkg"
         - "ghcr.io/dmkos/php:8.4-fpm-freebsd-pkg"
     restart: always
@@ -30,14 +30,32 @@ services:
         - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
         - "org.opencontainers.image.licenses=MIT"
       tags:
-        - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-fpm-freebsd${FREEBSD14_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd${FREEBSD14_VERSION}-pkg"
         - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd14-pkg"
         - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd-pkg"
-        - "ghcr.io/dmkos/php:${PHP85_VERSION}-fpm-freebsd${FREEBSD_VERSION}-pkg"
-        - "ghcr.io/dmkos/php:8.5-fpm-freebsd${FREEBSD_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-fpm-freebsd${FREEBSD14_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.5-fpm-freebsd${FREEBSD14_VERSION}-pkg"
         - "ghcr.io/dmkos/php:8.5-fpm-freebsd14-pkg"
         - "ghcr.io/dmkos/php:8.5-fpm-freebsd-pkg"
     restart: always
+    ports:
+      - "127.0.0.1:9000:9000"
+  85-150-php:
+    build:
+      context: .
+      dockerfile: variations/8.5-15.0/Containerfile
+      labels:
+        - "org.opencontainers.image.description=PHP-FPM 8.5 for FreeBSD 15, installed via package manager"
+        - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
+        - "org.opencontainers.image.source=https://github.com/dmkos/php-containers"
+        - "org.opencontainers.image.licenses=MIT"
+      tags:
+        - "docker.io/dmkos/php-freebsd:${PHP85_VERSION}-fpm-freebsd${FREEBSD15_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd${FREEBSD15_VERSION}-pkg"
+        - "docker.io/dmkos/php-freebsd:8.5-fpm-freebsd15-pkg"
+        - "ghcr.io/dmkos/php:${PHP85_VERSION}-fpm-freebsd${FREEBSD15_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.5-fpm-freebsd${FREEBSD15_VERSION}-pkg"
+        - "ghcr.io/dmkos/php:8.5-fpm-freebsd15-pkg"
     ports:
       - "127.0.0.1:9000:9000"

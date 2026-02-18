@@ -16,9 +16,15 @@ Image published at Container Registry and Docker Hub.
 
 * [`8.4-fpm-freebsd14.3-pkg`, `8.4-fpm-freebsd14-pkg`, `8.4-fpm-freebsd-pkg`](./variations/8.4-14.3/Containerfile): PHP 8.4, FPM, FreeBSD 14.3. PHP installed via the package manager.
 * [`8.5-fpm-freebsd14.3-pkg`, `8.5-fpm-freebsd14-pkg`, `8.5-fpm-freebsd-pkg`](./variations/8.5-14.3/Containerfile): PHP 8.4, FPM, FreeBSD 14.3. PHP installed via the package manager.
+* [`8.5-fpm-freebsd15.0-pkg`, `8.5-fpm-freebsd15-pkg`                       ](./variations/8.5-15.0/Containerfile): PHP 8.5, FPM, FreeBSD 15.0, PHP installed via the package manager.
 
 For historical reasons I decided to keep tags like `8.4.12-fpm-freebsd14.3-pkg`
 indicating PHP version at build time but you should avoid using it.
+
+> [!warning]
+> Since PHP 8.5.4, default tags will be for FreeBSD 15, which can break backward compatibility. Consider upgrade or use a more specific tag.
+
+There will be no PHP 8.4 image for FreeBSD 15.
 
 ### Configuration
 
