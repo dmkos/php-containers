@@ -50,7 +50,8 @@ ENV PHP_CFLAGS="-O2 -pipe -fstack-protector-strong -isystem /usr/local/include -
     PHP_CXXFLAGS="$PHP_CFLAGS -isystem /usr/local/include" \
     PHP_OPENSSL_CFLAGS="-I/usr/include" \
     PHP_OPENSSL_LIBS="-L/usr/lib -lssl -lcrypto" \
-    PHP_INI_DIR="/usr/local/etc/php"
+    PHP_INI_DIR="/usr/local/etc/php" \
+    GODEBUG="cgocheck=0"
 
 RUN set -eux; \
         podman-php-source extract; \
@@ -167,8 +168,7 @@ RUN set -eux; \
         rm -rf /var/db/pkg/repos
 
 ENV XDG_CONFIG_HOME=/var/db/frankenphp/config \
-    XDG_DATA_HOME=/var/db/frankenphp/data \
-    GODEBUG="cgocheck=0"
+    XDG_DATA_HOME=/var/db/frankenphp/data
 RUN set -eux; \
         umask 0022; \
         # set up directories in FreeBSD style
