@@ -6,7 +6,7 @@ RUN set -eux; \
         pkg bootstrap -y; \
         \
         # disable FreeBSD-base repo
-        sed -i '' 's/enabled: yes/enabled: no/' /usr/local/etc/pkg/repos/base.conf; \
+        echo 'FreeBSD-base: { enabled: no }' > /usr/local/etc/pkg/repos/base.conf; \
         # use the latest packages
         echo 'FreeBSD-ports: { url: "pkg+https://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf; \
         \
