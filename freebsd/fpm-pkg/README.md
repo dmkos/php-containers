@@ -24,6 +24,9 @@ indicating PHP version at build time but you should avoid using it.
 > [!warning]
 > Since PHP 8.5.4, default tags will be for FreeBSD 15, which can break backward compatibility. Consider upgrade or use a more specific tag.
 
+> [!warning]
+> After the release of PHP 8.5.4, FreeBSD 14 images will be upgraded to version 14.4, and version 14.3 will no longer be supported. Please plan upgrade.
+
 There will be no PHP 8.4 image for FreeBSD 15.
 
 ### Configuration
