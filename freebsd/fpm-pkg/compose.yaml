@@ -1,8 +1,8 @@
 services:
-  84-143-php:
+  84-144-php:
     build:
       context: .
-      dockerfile: variations/8.4-14.3/Containerfile
+      dockerfile: variations/8.4-14.4/Containerfile
       labels:
         - "org.opencontainers.image.description=PHP-FPM 8.4 for FreeBSD, installed via package manager"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
@@ -20,10 +20,10 @@ services:
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
-  85-143-php:
+  85-144-php:
     build:
       context: .
-      dockerfile: variations/8.5-14.3/Containerfile
+      dockerfile: variations/8.5-14.4/Containerfile
       labels:
         - "org.opencontainers.image.description=PHP-FPM 8.5 for FreeBSD, installed via package manager"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"
