@@ -1,8 +1,8 @@
 services:
-  84-143-builder:
+  84-144-builder:
     build:
       context: .
-      dockerfile: variations/8.4-14.3/builder.containerfile
+      dockerfile: variations/8.4-14.4/builder.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD14_VERSION}
         - PHP_VERSION=${PHP84_VERSION}
@@ -28,10 +28,10 @@ services:
         - "ghcr.io/dmkos/php:8.4-frankenphp-1.12-builder-freebsd14"
         - "ghcr.io/dmkos/php:8.4-frankenphp-builder-freebsd"
     command: "echo 'Build only'"
-  84-143-runner:
+  84-144-runner:
     build:
       context: .
-      dockerfile: variations/8.4-14.3/runner.containerfile
+      dockerfile: variations/8.4-14.4/runner.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD14_VERSION}
         - PHP_VERSION=${PHP84_VERSION}
@@ -71,10 +71,10 @@ services:
       - ./src/demo:/usr/local/www/app
       - franken_config:/var/db/frankenphp/config
       - franken_data:/var/db/frankenphp/data
-  85-143-builder:
+  85-144-builder:
     build:
       context: .
-      dockerfile: variations/8.5-14.3/builder.containerfile
+      dockerfile: variations/8.5-14.4/builder.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD14_VERSION}
         - PHP_VERSION=${PHP85_VERSION}
@@ -106,10 +106,10 @@ services:
         - "ghcr.io/dmkos/php:8.5-frankenphp-builder-freebsd"
         - "ghcr.io/dmkos/php:8-frankenphp-builder-freebsd"
     command: "echo 'Build only'"
-  85-143-runner:
+  85-144-runner:
     build:
       context: .
-      dockerfile: variations/8.5-14.3/runner.containerfile
+      dockerfile: variations/8.5-14.4/runner.containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD14_VERSION}
         - PHP_VERSION=${PHP85_VERSION}

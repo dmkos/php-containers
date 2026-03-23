@@ -17,18 +17,18 @@ fewer combinations along with PHP versions at the beginning. I recommend
 `8.4-frankenphp-freebsd` and `8.4-frankenphp-builder-freebsd`.
 
 * PHP 8.4:
-    * [`8.4.18-frankenphp-1.12.1-freebsd14.3`,         `8.4-frankenphp-1.12-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.12.1-php8.4.18-freebsd14.3`,         `frankenphp-1.12-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.3/runner.containerfile) - end-user FreeBSD 14 "runner" image
-    * [`8.4.18-frankenphp-1.12.1-builder-freebsd14.3`, `8.4-frankenphp-1.12-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.12.1-builder-php8.4.18-freebsd14.3`, `frankenphp-1.12-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.3/builder.containerfile) - FreeBSD 14 builder image
+    * [`8.4.19-frankenphp-1.12.1-freebsd14.4`,         `8.4-frankenphp-1.12-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.12.1-php8.4.19-freebsd14.4`,         `frankenphp-1.12-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.4/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.4.19-frankenphp-1.12.1-builder-freebsd14.4`, `8.4-frankenphp-1.12-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.12.1-builder-php8.4.19-freebsd14.4`, `frankenphp-1.12-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.4/builder.containerfile) - FreeBSD 14 builder image
 * PHP 8.5:
-    * [`8.5.3-frankenphp-1.12.1-freebsd-15.0`,        `8.5-frankenphp-1.12-freebsd-15`,        `8.5-frankenphp-freebsd-15`,                                      `frankenphp-1.12.1-php8.5.3-freebsd15.0`,         `frankenphp-1.12-php8.5-freebsd15`,                                              `frankenphp-php8.5-freebsd15`                                    ](./variations/8.5-15.0/Containerfile) - single FreeBSD 15 image
-    * [`8.5.3-frankenphp-1.12.1-freebsd14.3`,         `8.5-frankenphp-1.12-freebsd14`,         `8.5-frankenphp-freebsd`,         `8-frankenphp-freebsd`,         `frankenphp-1.12.1-php8.5.3-freebsd14.3`,         `frankenphp-1.12-php8.5-freebsd14`,         `frankenphp-1-php8-freebsd`,         `frankenphp-php8.5-freebsd`,         `frankenphp-freebsd`        ](./variations/8.5-14.3/runner.containerfile) - end-user FreeBSD 14 "runner" image
-    * [`8.5.3-frankenphp-1.12.1-builder-freebsd14.3`, `8.5-frankenphp-1.12-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`, `8-frankenphp-builder-freebsd`, `frankenphp-1.12.1-builder-php8.5.3-freebsd14.3`, `frankenphp-1.12-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.3/builder.containerfile) - FreeBSD 14 builder image
+    * [`8.5.4-frankenphp-1.12.1-freebsd-15.0`,        `8.5-frankenphp-1.12-freebsd-15`,        `8.5-frankenphp-freebsd-15`,                                      `frankenphp-1.12.1-php8.5.4-freebsd15.0`,         `frankenphp-1.12-php8.5-freebsd15`,                                              `frankenphp-php8.5-freebsd15`                                    ](./variations/8.5-15.0/Containerfile) - single FreeBSD 15 image
+    * [`8.5.4-frankenphp-1.12.1-freebsd14.4`,         `8.5-frankenphp-1.12-freebsd14`,         `8.5-frankenphp-freebsd`,         `8-frankenphp-freebsd`,         `frankenphp-1.12.1-php8.5.4-freebsd14.4`,         `frankenphp-1.12-php8.5-freebsd14`,         `frankenphp-1-php8-freebsd`,         `frankenphp-php8.5-freebsd`,         `frankenphp-freebsd`        ](./variations/8.5-14.4/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.5.4-frankenphp-1.12.1-builder-freebsd14.4`, `8.5-frankenphp-1.12-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`, `8-frankenphp-builder-freebsd`, `frankenphp-1.12.1-builder-php8.5.4-freebsd14.4`, `frankenphp-1.12-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`, `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.4/builder.containerfile) - FreeBSD 14 builder image
 
 > [!warning]
 > Since PHP 8.5.4, default tags will be for FreeBSD 15, breaking backward compatibility. Consider upgrade or use a more specific tag.
 
 > [!warning]
-> After the release of PHP 8.5.4, FreeBSD 14 images will be upgraded to version 14.4, and version 14.3 will no longer be supported. Please plan upgrade.
+> After the release of PHP 8.5.4, FreeBSD 14 images were upgraded to version 14.4, and version 14.3 is no longer supported. Please upgrade.
 
 ## Usage
 
@@ -318,7 +318,7 @@ RUN set -eux; \
 
 To avoid having to drag literally the entire FreeBSD installation to your
 system, you should implement multi-stage build similar to
-[`runner.containerfile`](./variations/8.4-14.3/runner.containerfile).
+[`runner.containerfile`](./variations/8.4-14.4/runner.containerfile).
 At the first stage install additional extensions as described above.
 Then build final image by copying PHP from previous step.
 
