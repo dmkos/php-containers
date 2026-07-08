@@ -30,6 +30,9 @@ fewer combinations along with PHP versions at the beginning. I recommend
 > [!warning]
 > After the release of PHP 8.5.4, FreeBSD 14 images were upgraded to version 14.4, and version 14.3 is no longer supported. Please upgrade.
 
+> [!warning]
+> After the release of PHP 8.5.9, FreeBSD 15 images will be upgraded to version 15.1, and support for version 15.0 will be discontinued. Please plan upgrade.
+
 ## Usage
 
 Images available at Container Registry and Docker Hub.
