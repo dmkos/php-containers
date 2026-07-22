@@ -170,7 +170,8 @@ RUN set -eux; \
         mkdir -p $XDG_CONFIG_HOME; \
         mkdir -p $XDG_DATA_HOME; \
         mkdir -p /usr/local/www/app/public; \
-        echo '<?php phpinfo(); ?>' > /usr/local/www/app/public/index.php
+        # FrankenPHP welcome page
+        fetch -o /usr/local/www/app/public/index.php https://raw.githubusercontent.com/php/frankenphp/refs/tags/v${FRANKENPHP_VERSION}/package/content/index.php
 
 COPY --chmod=755 bin/podman-php-entrypoint /usr/local/bin/
 ENTRYPOINT ["podman-php-entrypoint"]
