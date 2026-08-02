@@ -23,6 +23,7 @@ ENTRYPOINT ["/init"]
 
 # Configure
 COPY s6-rc.d/ /etc/s6-overlay/s6-rc.d/
+COPY user-bundles.d/ /etc/s6-overlay/user-bundles.d/
 COPY s6.conf.d/*.conf /etc/lighttpd/conf.d/
 RUN set -eux; \
         # fix permissions
