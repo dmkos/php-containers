@@ -147,10 +147,10 @@ services:
       - ./src/demo:/usr/local/www/app
       - franken_config:/var/db/frankenphp/config
       - franken_data:/var/db/frankenphp/data
-  85-150-toolchain:
+  85-151-toolchain:
     build:
       context: .
-      dockerfile: variations/8.5-15.0/Containerfile
+      dockerfile: variations/8.5-15.1/Containerfile
       args:
         - FREEBSD_VERSION=${FREEBSD15_VERSION}
         - PHP_VERSION=${PHP85_VERSION}

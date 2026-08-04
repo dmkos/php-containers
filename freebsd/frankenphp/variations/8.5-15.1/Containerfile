@@ -1,13 +1,11 @@
-ARG FREEBSD_VERSION=15.0
+ARG FREEBSD_VERSION=15.1
 FROM ghcr.io/freebsd/freebsd-toolchain:$FREEBSD_VERSION
 
 # Install software
 RUN set -eux; \
         pkg bootstrap -y; \
         \
-        # disable FreeBSD-base repo
-        echo 'FreeBSD-base: { enabled: no }' > /usr/local/etc/pkg/repos/base.conf; \
-        # use the latest packages
+        # use the latest packages (also disables FreeBSD-base)
         echo 'FreeBSD-ports: { url: "pkg+https://pkg.FreeBSD.org/${ABI}/latest" }' > /usr/local/etc/pkg/repos/FreeBSD.conf; \
         \
         pkg install -y \
