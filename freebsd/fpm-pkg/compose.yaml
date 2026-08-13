@@ -39,10 +39,10 @@ services:
     restart: always
     ports:
       - "127.0.0.1:9000:9000"
-  85-150-php:
+  85-151-php:
     build:
       context: .
-      dockerfile: variations/8.5-15.0/Containerfile
+      dockerfile: variations/8.5-15.1/Containerfile
       labels:
         - "org.opencontainers.image.description=PHP-FPM 8.5 for FreeBSD 15, installed via package manager"
         - "org.opencontainers.image.vendor=Dmitriy Kosolapov"

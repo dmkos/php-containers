@@ -16,7 +16,7 @@ Image published at Container Registry and Docker Hub.
 
 * [`8.4-fpm-freebsd14.4-pkg`, `8.4-fpm-freebsd14-pkg`, `8.4-fpm-freebsd-pkg`](./variations/8.4-14.4/Containerfile): PHP 8.4, FPM, FreeBSD 14.4. PHP installed via the package manager.
 * [`8.5-fpm-freebsd14.4-pkg`, `8.5-fpm-freebsd14-pkg`](./variations/8.5-14.4/Containerfile): PHP 8.4, FPM, FreeBSD 14.4. PHP installed via the package manager.
-* [`8.5-fpm-freebsd15.0-pkg`, `8.5-fpm-freebsd15-pkg`, `8.5-fpm-freebsd-pkg`, `8-fpm-freebsd-pkg`, `fpm-freebsd-pkg`](./variations/8.5-15.0/Containerfile): PHP 8.5, FPM, FreeBSD 15.0, PHP installed via the package manager.
+* [`8.5-fpm-freebsd15.1-pkg`, `8.5-fpm-freebsd15-pkg`, `8.5-fpm-freebsd-pkg`, `8-fpm-freebsd-pkg`, `fpm-freebsd-pkg`](./variations/8.5-15.1/Containerfile): PHP 8.5, FPM, FreeBSD 15.1, PHP installed via the package manager.
 
 For historical reasons I decided to keep tags like `8.4.12-fpm-freebsd14.3-pkg`
 indicating PHP version at build time but you should avoid using it.
@@ -28,7 +28,7 @@ indicating PHP version at build time but you should avoid using it.
 > After the release of PHP 8.5.4, FreeBSD 14 images were upgraded to version 14.4, and version 14.3 is no longer supported. Please upgrade.
 
 > [!warning]
-> After the release of PHP 8.5.9, FreeBSD 15 images will be upgraded to version 15.1, and support for version 15.0 will be discontinued. Please plan upgrade.
+> After the release of PHP 8.5.9, FreeBSD 15 images were upgraded to version 15.1, and version 15.0 is no longer supported. Please upgrade.
 
 There will be no PHP 8.4 image for FreeBSD 15.
 
