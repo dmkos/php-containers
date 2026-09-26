@@ -9,7 +9,7 @@ FROM ghcr.io/dmkos/php-freebsd:frankenphp-${FRANKENPHP_VERSION}-builder-php${PHP
 # Install dependencies
 RUN set -eux; \
         pkg install -y \
-            databases/postgresql17-client \
+            databases/postgresql18-client \
             devel/icu \
             graphics/libavif \
             graphics/png \
@@ -77,7 +77,7 @@ RUN set -eux; \
             libxml2 \
             sqlite3 \
             # additional
-            databases/postgresql17-client \
+            databases/postgresql18-client \
             devel/icu \
             graphics/libavif \
             graphics/png \
