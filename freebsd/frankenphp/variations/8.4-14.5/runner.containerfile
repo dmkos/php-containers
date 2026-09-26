@@ -33,15 +33,21 @@ RUN set -eux; \
             pcntl \
             pdo_mysql \
             pdo_pgsql \
-            pgsql; \
-        pecl install \
-            # https://pecl.php.net/package/uploadprogress
-            uploadprogress-2.0.2; \
-        podman-php-ext-enable uploadprogress; \
-        rm -rf /tmp/pear; \
+            pgsql \
+        ; \
         podman-php-source delete; \
         # smoke test
         php -m | grep -e gd -e intl -e pgsql
+
+# Install PECL Uploadprogress
+RUN set -eux; \
+        pecl update-channels; \
+        pecl install \
+            # https://pecl.php.net/package/uploadprogress
+            uploadprogress-2.0.2 \
+        ; \
+        podman-php-ext-enable uploadprogress; \
+        rm -rf /tmp/pear
 
 # Composer's official Docker image
 FROM --platform=linux/amd64 docker.io/library/composer:2 AS composer
