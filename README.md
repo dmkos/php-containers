@@ -13,8 +13,8 @@ Specify tag from list below.
 
 ## Supported tags
 
-* [`8.4-fpm-freebsd14.4-pkg`, `8.4-fpm-freebsd14-pkg`, `8.4-fpm-freebsd-pkg`](./freebsd/fpm-pkg/variations/8.4-14.4/Containerfile)
-* [`8.5-fpm-freebsd14.4-pkg`, `8.5-fpm-freebsd14-pkg`](./freebsd/fpm-pkg/variations/8.5-14.4/Containerfile)
+* [`8.4-fpm-freebsd14.5-pkg`, `8.4-fpm-freebsd14-pkg`, `8.4-fpm-freebsd-pkg`](./freebsd/fpm-pkg/variations/8.4-14.5/Containerfile)
+* [`8.5-fpm-freebsd14.5-pkg`, `8.5-fpm-freebsd14-pkg`](./freebsd/fpm-pkg/variations/8.5-14.5/Containerfile)
 * [`8.5-fpm-freebsd15.1-pkg`, `8.5-fpm-freebsd15-pkg`, `8.5-fpm-freebsd-pkg`, `8-fpm-freebsd-pkg`, `fpm-freebsd-pkg`](./freebsd/fpm-pkg/variations/8.5-15.1/Containerfile)
 * [`8.4.26-frankenphp-1.12.7-freebsd14.5`,         `8.4-frankenphp-1.12-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.12.7-php8.4.26-freebsd14.5`,         `frankenphp-1.12-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./freebsd/frankenphp/variations/8.4-14.5/runner.containerfile)
 * [`8.4.26-frankenphp-1.12.7-builder-freebsd14.5`, `8.4-frankenphp-1.12-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.12.7-builder-php8.4.26-freebsd14.5`, `frankenphp-1.12-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./freebsd/frankenphp/variations/8.4-14.5/builder.containerfile)
