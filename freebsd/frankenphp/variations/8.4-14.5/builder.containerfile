@@ -106,8 +106,9 @@ RUN set -eux; \
             --enable-embed \
             # FrankenPHP
             --enable-zts \
-            --disable-zend-signals; \
-        \
+            --disable-zend-signals \
+            --enable-zend-max-execution-timers \
+        ; \
         make -j "$(nproc)"; \
         make install; \
         strip --strip-all /usr/local/bin/perl; \
@@ -151,7 +152,7 @@ RUN set -eux; \
         \
         CGO_CFLAGS="-DFRANKENPHP_VERSION=v${FRANKENPHP_VERSION} $(php-config --includes) -I/usr/local/include" \
         CGO_LDFLAGS="$(php-config --ldflags) $(php-config --libs)" \
-        go build -tags=nobadger,nomysql,nopgx; \
+        go build -tags=nobadger,nomysql,nopgx,deprecated_topic,deprecated_claim; \
         strip --strip-all frankenphp; \
         \
         # smoke test
