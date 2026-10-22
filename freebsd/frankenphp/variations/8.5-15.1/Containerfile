@@ -34,7 +34,7 @@ ARG PHP_VERSION PHP_SHA256 FRANKENPHP_VERSION WATCHER_VERSION
 ENV PHP_VERSION=$PHP_VERSION \
     PHP_SHA256=$PHP_SHA256
 RUN set -eux; \
-        fetch -o /usr/src/php.tar.xz https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz; \
+        curl -o /usr/src/php.tar.xz https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz; \
         sha256 -c $PHP_SHA256 /usr/src/php.tar.xz; \
         # For GitHub sources digests are not available
         fetch -o /usr/src/frankenphp.tar.gz https://github.com/php/frankenphp/archive/refs/tags/v${FRANKENPHP_VERSION}.tar.gz; \
