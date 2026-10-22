@@ -255,8 +255,25 @@ The image includes all "official" extensions as well as:
 * pdo_pgsql
 * pgsql
 
-And also PECL [uploadprogress](https://pecl.php.net/package/uploadprogress)
-as an example.
+> [!warning]
+> Since FrankenPHP 1.13.2 and PHP 8.4.27, 8.5.12 the [PECL uploadprogress](https://pecl.php.net/package/uploadprogress) extension has been excluded from the build.
+
+Consider tracking file upload progress via the [session](https://www.php.net/manual/en/session.upload-progress.php).
+If you truly require this extension, build your image by following the pattern
+used for [`runner.containerfile`](./variations/8.5-14.5/runner.containerfile)
+as described below. Here is code snippet for installing the extension:
+
+```dockerfile
+# Install PECL Uploadprogress
+RUN set -eux; \
+    pecl update-channels; \
+    pecl install \
+        # https://pecl.php.net/package/uploadprogress
+        uploadprogress-2.0.2 \
+    ; \
+    podman-php-ext-enable uploadprogress; \
+    rm -rf /tmp/pear
+```
 
 #### FreeBSD 15
 
