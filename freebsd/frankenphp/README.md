@@ -338,7 +338,7 @@ RUN set -eux; \
 
 To avoid having to drag literally the entire FreeBSD installation to your
 system, you should implement multi-stage build similar to
-[`runner.containerfile`](./variations/8.4-14.5/runner.containerfile).
+[`runner.containerfile`](./variations/8.5-14.5/runner.containerfile).
 At the first stage install additional extensions as described above.
 Then build final image by copying PHP from previous step.
 
