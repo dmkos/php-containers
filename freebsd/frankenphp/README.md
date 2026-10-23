@@ -17,12 +17,12 @@ fewer combinations along with PHP versions at the beginning. I recommend
 `8.4-frankenphp-freebsd` and `8.4-frankenphp-builder-freebsd`.
 
 * PHP 8.4:
-    * [`8.4.27-frankenphp-1.13.2-freebsd14.5`,         `8.4-frankenphp-1.13-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.13.2-php8.4.27-freebsd14.5`,         `frankenphp-1.13-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.5/runner.containerfile) - end-user FreeBSD 14 "runner" image
-    * [`8.4.27-frankenphp-1.13.2-builder-freebsd14.5`, `8.4-frankenphp-1.13-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.13.2-builder-php8.4.27-freebsd14.5`, `frankenphp-1.13-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.5/builder.containerfile) - FreeBSD 14 builder image
+    * [`8.4.27-frankenphp-1.13.3-freebsd14.5`,         `8.4-frankenphp-1.13-freebsd14`,         `8.4-frankenphp-freebsd`,         `frankenphp-1.13.3-php8.4.27-freebsd14.5`,         `frankenphp-1.13-php8.4-freebsd14`,         `frankenphp-php8.4-freebsd`        ](./variations/8.4-14.5/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.4.27-frankenphp-1.13.3-builder-freebsd14.5`, `8.4-frankenphp-1.13-builder-freebsd14`, `8.4-frankenphp-builder-freebsd`, `frankenphp-1.13.3-builder-php8.4.27-freebsd14.5`, `frankenphp-1.13-builder-php8.4-freebsd14`, `frankenphp-builder-php8.4-freebsd`](./variations/8.4-14.5/builder.containerfile) - FreeBSD 14 builder image
 * PHP 8.5:
     * [`8.5.12-frankenphp-1.13.2-freebsd-15.1`,        `8.5-frankenphp-1.13-freebsd-15`,        `8.5-frankenphp-freebsd-15`,      `8.5-frankenphp-freebsd`, `8-frankenphp-freebsd`,         `frankenphp-1.13.2-php8.5.12-freebsd15.1`,         `frankenphp-1.13-php8.5-freebsd15`,         `frankenphp-1-php8-freebsd`,         `frankenphp-php8.5-freebsd15`, `frankenphp-php8.5-freebsd`,         `frankenphp-freebsd`        ](./variations/8.5-15.1/Containerfile) - single FreeBSD 15 image
-    * [`8.5.12-frankenphp-1.13.2-freebsd14.5`,         `8.5-frankenphp-1.13-freebsd14`,         `8.5-frankenphp-freebsd14`,                                                                 `frankenphp-1.13.2-php8.5.12-freebsd14.5`,         `frankenphp-1.13-php8.5-freebsd14`                                                                                                                                               ](./variations/8.5-14.5/runner.containerfile) - end-user FreeBSD 14 "runner" image
-    * [`8.5.12-frankenphp-1.13.2-builder-freebsd14.5`, `8.5-frankenphp-1.13-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`,                           `8-frankenphp-builder-freebsd`, `frankenphp-1.13.2-builder-php8.5.12-freebsd14.5`, `frankenphp-1.13-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`,                                `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.5/builder.containerfile) - FreeBSD 14 builder image
+    * [`8.5.12-frankenphp-1.13.3-freebsd14.5`,         `8.5-frankenphp-1.13-freebsd14`,         `8.5-frankenphp-freebsd14`,                                                                 `frankenphp-1.13.3-php8.5.12-freebsd14.5`,         `frankenphp-1.13-php8.5-freebsd14`                                                                                                                                               ](./variations/8.5-14.5/runner.containerfile) - end-user FreeBSD 14 "runner" image
+    * [`8.5.12-frankenphp-1.13.3-builder-freebsd14.5`, `8.5-frankenphp-1.13-builder-freebsd14`, `8.5-frankenphp-builder-freebsd`,                           `8-frankenphp-builder-freebsd`, `frankenphp-1.13.3-builder-php8.5.12-freebsd14.5`, `frankenphp-1.13-builder-php8.5-freebsd14`, `frankenphp-1-builder-php8-freebsd`,                                `frankenphp-builder-php8.5-freebsd`, `frankenphp-builder-freebsd`](./variations/8.5-14.5/builder.containerfile) - FreeBSD 14 builder image
 
 > [!warning]
 > Since PHP 8.5.4, the default tags are for FreeBSD 15, which can break backward compatibility. Please upgrade or use a more specific tag.
@@ -256,7 +256,7 @@ The image includes all "official" extensions as well as:
 * pgsql
 
 > [!warning]
-> Since FrankenPHP 1.13.2 and PHP 8.4.27, 8.5.12 the [PECL uploadprogress](https://pecl.php.net/package/uploadprogress) extension has been excluded from the build.
+> Since FrankenPHP 1.13.3 and PHP 8.4.27, 8.5.12 the [PECL uploadprogress](https://pecl.php.net/package/uploadprogress) extension has been excluded from the build.
 
 Consider tracking file upload progress via the [session](https://www.php.net/manual/en/session.upload-progress.php).
 If you truly require this extension, build your image by following the pattern
