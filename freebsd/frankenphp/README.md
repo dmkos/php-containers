@@ -256,7 +256,7 @@ The image includes all "official" extensions as well as:
 * pgsql
 
 > [!warning]
-> Since FrankenPHP 1.13.3 and PHP 8.4.27, 8.5.12 the [PECL uploadprogress](https://pecl.php.net/package/uploadprogress) extension has been excluded from the build.
+> Since FrankenPHP 1.13.2 and PHP 8.4.27, 8.5.12 the [PECL uploadprogress](https://pecl.php.net/package/uploadprogress) extension has been excluded from the build.
 
 Consider tracking file upload progress via the [session](https://www.php.net/manual/en/session.upload-progress.php).
 If you truly require this extension, build your image by following the pattern
